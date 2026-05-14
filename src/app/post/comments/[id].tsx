@@ -3,133 +3,19 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { View, Text, Image, TouchableOpacity, FlatList, TextInput, KeyboardAvoidingView, Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+import { CommentInput } from "@/components/feed/comment-input";
+import { CommentItem } from "@/components/feed/comments/comment-item";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Colors } from "@/constants/theme";
 import { ColorsContext } from "@/context/colors-context";
 import { MOCK_FEED, FeedPost, FeedComment } from "@/data/mock-feed";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { formatRelativeTime } from "@/utils/feed-utils";
+import { buildMentionSuggestions } from "@/utils/mention-utils";
 
 interface ReplyInfo {
   commentId: string;
   username: string;
-}
-
-function CommentItem({
-  comment,
-  colors,
-  onReply,
-  onProfilePress,
-  isReply = false
-}: {
-  comment: FeedComment;
-  colors: typeof Colors.light;
-  onReply: (commentId: string, username: string) => void;
-  onProfilePress: (username: string) => void;
-  isReply?: boolean;
-}) {
-  const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(comment.likes);
-  const [showReplies, setShowReplies] = useState(false);
-
-  const formattedTime = formatRelativeTime(comment.timestamp);
-  const hasReplies = comment.replies && comment.replies.length > 0;
-
-  return (
-    <View>
-      <View
-        style={{
-          flexDirection: "row",
-          paddingHorizontal: 16,
-          paddingLeft: isReply ? 56 : 16,
-          paddingVertical: 12,
-          alignItems: "flex-start",
-          gap: 12
-        }}
-      >
-        <TouchableOpacity onPress={() => onProfilePress(comment.username)}>
-          <Image
-            source={{ uri: comment.avatar }}
-            style={{
-              width: isReply ? 28 : 36,
-              height: isReply ? 28 : 36,
-              borderRadius: isReply ? 14 : 18
-            }}
-          />
-        </TouchableOpacity>
-        <View style={{ flex: 1 }}>
-          <Text style={{ fontSize: 14, color: colors.text, lineHeight: 20 }}>
-            <Text style={{ fontWeight: "600" }} onPress={() => onProfilePress(comment.username)}>
-              {comment.username}
-            </Text>{" "}
-            {comment.replyingTo && (
-              <Text style={{ color: "#3d2847" }} onPress={() => onProfilePress(comment.replyingTo!)}>
-                @{comment.replyingTo}{" "}
-              </Text>
-            )}
-            {comment.text}
-          </Text>
-          <View style={{ flexDirection: "row", gap: 16, marginTop: 6 }}>
-            <Text style={{ fontSize: 12, color: colors.icon }}>{formattedTime}</Text>
-            <Text style={{ fontSize: 12, color: colors.icon }}>{likeCount} likes</Text>
-            <TouchableOpacity onPress={() => onReply(comment.id, comment.username)}>
-              <Text style={{ fontSize: 12, color: colors.icon, fontWeight: "600" }}>Reply</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <TouchableOpacity
-          onPress={() => {
-            setIsLiked(!isLiked);
-            setLikeCount(isLiked ? likeCount - 1 : likeCount + 1);
-          }}
-          style={{ paddingTop: 4 }}
-        >
-          <IconSymbol name={isLiked ? "heart.fill" : "heart"} size={14} color={isLiked ? "#FF6B6B" : colors.icon} />
-        </TouchableOpacity>
-      </View>
-
-      {/* View replies toggle */}
-      {hasReplies && !isReply && (
-        <TouchableOpacity
-          onPress={() => setShowReplies(!showReplies)}
-          style={{
-            paddingLeft: 64,
-            paddingBottom: 8,
-            flexDirection: "row",
-            alignItems: "center",
-            gap: 8
-          }}
-        >
-          <View
-            style={{
-              width: 24,
-              height: 1,
-              backgroundColor: colors.icon
-            }}
-          />
-          <Text style={{ fontSize: 12, color: colors.icon, fontWeight: "600" }}>
-            {showReplies
-              ? "Hide replies"
-              : `View ${comment.replies!.length} ${comment.replies!.length === 1 ? "reply" : "replies"}`}
-          </Text>
-        </TouchableOpacity>
-      )}
-
-      {/* Replies */}
-      {showReplies &&
-        hasReplies &&
-        comment.replies!.map(reply => (
-          <CommentItem
-            key={reply.id}
-            comment={reply}
-            colors={colors}
-            onReply={onReply}
-            onProfilePress={onProfilePress}
-            isReply
-          />
-        ))}
-    </View>
-  );
 }
 
 export default function CommentsScreen() {
@@ -153,6 +39,10 @@ export default function CommentsScreen() {
     }
   }, [id]);
 
+  const handleProfilePress = useCallback((username: string) => {
+    router.push(`/profile/${username}`);
+  }, [router]);
+
   const handleReply = useCallback((commentId: string, username: string) => {
     setReplyInfo({ commentId, username });
     setNewComment(`@${username} `);
@@ -164,6 +54,9 @@ export default function CommentsScreen() {
 
     const commentText = replyInfo ? newComment.replace(`@${replyInfo.username} `, "") : newComment;
 
+    // Build mention suggestions for the comment context
+    const mentionSuggestions = buildMentionSuggestions(comments, commentText);
+
     const newCommentObj: FeedComment = {
       id: `new-comment-${Date.now()}`,
       username: "you",
@@ -172,6 +65,11 @@ export default function CommentsScreen() {
       likes: 0,
       timestamp: "Just now",
       replyingTo: replyInfo?.username,
+      mentions: mentionSuggestions.slice(0, 5).map((s, i) => ({
+        username: s.username,
+        position: { start: i, end: i + s.username.length },
+        userId: s.username,
+      })),
       replies: []
     };
 
@@ -195,7 +93,7 @@ export default function CommentsScreen() {
 
     setNewComment("");
     setReplyInfo(null);
-  }, [newComment, post, replyInfo]);
+  }, [newComment, post, replyInfo, comments]);
 
   const cancelReply = useCallback(() => {
     setReplyInfo(null);
@@ -302,7 +200,7 @@ export default function CommentsScreen() {
               comment={item}
               colors={colors}
               onReply={handleReply}
-              onProfilePress={username => router.push(`/profile/${username}`)}
+              onProfilePress={handleProfilePress}
             />
           )}
           keyExtractor={item => item.id}
@@ -348,53 +246,17 @@ export default function CommentsScreen() {
         )}
 
         {/* Comment Input */}
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            paddingHorizontal: 12,
-            paddingVertical: 10,
-            borderTopWidth: replyInfo ? 0 : 0.5,
-            borderTopColor: colors.border,
-            backgroundColor: colors.background,
-            paddingBottom: insets.bottom + 10
-          }}
-        >
-          <Image
-            source={{ uri: "https://i.pravatar.cc/150?img=68" }}
-            style={{ width: 36, height: 36, borderRadius: 18 }}
-          />
-          <TextInput
-            ref={inputRef}
-            style={{
-              flex: 1,
-              marginHorizontal: 12,
-              paddingVertical: 10,
-              paddingHorizontal: 14,
-              backgroundColor: colors.icon + "15",
-              borderRadius: 22,
-              color: colors.text,
-              fontSize: 14
-            }}
-            placeholder={replyInfo ? `Reply to @${replyInfo.username}...` : "Add a comment..."}
-            placeholderTextColor={colors.icon}
-            value={newComment}
-            onChangeText={setNewComment}
-            multiline
-            maxLength={500}
-          />
-          <TouchableOpacity onPress={handleAddComment} disabled={!newComment.trim()}>
-            <Text
-              style={{
-                color: newComment.trim() ? "#271c2d" : colors.icon,
-                fontWeight: "600",
-                fontSize: 14
-              }}
-            >
-              Post
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <CommentInput
+          ref={inputRef}
+          value={newComment}
+          onChangeText={setNewComment}
+          onSubmit={handleAddComment}
+          placeholder={replyInfo ? `Reply to @${replyInfo.username}...` : "Add a comment..."}
+          colors={colors}
+          comments={comments}
+          bottomInset={insets.bottom}
+          showTopBorder={!replyInfo}
+        />
       </KeyboardAvoidingView>
     </ColorsContext.Provider>
   );
