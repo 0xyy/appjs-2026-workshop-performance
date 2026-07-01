@@ -1,10 +1,10 @@
-import { useState, useCallback } from 'react';
+import { memo, useState, useCallback } from 'react';
 import { TouchableOpacity } from 'react-native';
 
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
 
-export function BookmarkButton({
+export const BookmarkButton = memo(function BookmarkButton({
   initialIsBookmarked,
   colors,
 }: {
@@ -26,4 +26,4 @@ export function BookmarkButton({
       />
     </TouchableOpacity>
   );
-}
+});
