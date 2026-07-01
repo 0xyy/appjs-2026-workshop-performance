@@ -1,10 +1,10 @@
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { TouchableOpacity, Share } from 'react-native';
 
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
 
-export function ShareButton({
+export const ShareButton = memo(function ShareButton({
   postId,
   username,
   colors,
@@ -34,4 +34,4 @@ export function ShareButton({
       <IconSymbol name="paperplane" size={24} color={colors.text} />
     </TouchableOpacity>
   );
-}
+});
