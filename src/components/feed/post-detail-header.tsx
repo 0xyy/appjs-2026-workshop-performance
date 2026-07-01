@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { useRouter } from 'expo-router';
 import {
   GestureResponderEvent,
@@ -20,24 +20,14 @@ import { formatRelativeTime } from '@/utils/feed-utils';
 
 interface PostDetailHeaderProps {
   post: FeedPost;
-  isLiked: boolean;
-  likesCount: number;
-  shareCount: number;
   commentsCount: number;
   hasNewComments: boolean;
-  onLike: () => void;
-  onShareComplete: () => void;
 }
 
 export const PostDetailHeader = ({
   post,
-  isLiked,
-  likesCount,
-  shareCount,
   commentsCount,
   hasNewComments,
-  onLike,
-  onShareComplete,
 }: PostDetailHeaderProps) => {
   const colors = useContext(ColorsContext);
   const router = useRouter();
@@ -45,6 +35,19 @@ export const PostDetailHeader = ({
   const [menuAnchor, setMenuAnchor] = useState<
     { x: number; y: number } | undefined
   >();
+  const [isLiked, setIsLiked] = useState(post.isLiked);
+  const [likesCount, setLikesCount] = useState(post.likes);
+  const [shareCount, setShareCount] = useState(0);
+
+  const handleLike = useCallback(() => {
+    setIsLiked((prevIsLiked) => {
+      const nextIsLiked = !prevIsLiked;
+      setLikesCount(
+        (prevLikesCount) => prevLikesCount + (nextIsLiked ? 1 : -1),
+      );
+      return nextIsLiked;
+    });
+  }, []);
 
   return (
     <View>
@@ -136,12 +139,14 @@ export const PostDetailHeader = ({
         }}
       >
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 14 }}>
-          <LikeButton isLiked={isLiked} colors={colors} onPress={onLike} />
+          <LikeButton isLiked={isLiked} colors={colors} onPress={handleLike} />
           <ShareButton
             postId={post.id}
             username={post.user.username}
             colors={colors}
-            onShareComplete={() => onShareComplete()}
+            onShareComplete={() =>
+              setShareCount((prevShareCount) => prevShareCount + 1)
+            }
           />
         </View>
         <BookmarkButton
