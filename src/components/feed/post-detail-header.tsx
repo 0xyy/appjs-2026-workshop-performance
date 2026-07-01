@@ -1,4 +1,4 @@
-import { useCallback, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useRouter } from 'expo-router';
 import {
   GestureResponderEvent,
@@ -8,9 +8,7 @@ import {
   View,
 } from 'react-native';
 
-import { BookmarkButton } from '@/components/feed/actions/bookmark-button';
-import { LikeButton } from '@/components/feed/actions/like-button';
-import { ShareButton } from '@/components/feed/actions/share-button';
+import { PostActionsBar } from '@/components/feed/actions/post-actions-bar';
 import { ImageCarousel } from '@/components/feed/content/image-carousel';
 import { PostOptionsMenu } from '@/components/feed/header/post-options-menu';
 import { IconSymbol } from '@/components/ui/icon-symbol';
@@ -35,19 +33,6 @@ export const PostDetailHeader = ({
   const [menuAnchor, setMenuAnchor] = useState<
     { x: number; y: number } | undefined
   >();
-  const [isLiked, setIsLiked] = useState(post.isLiked);
-  const [likesCount, setLikesCount] = useState(post.likes);
-  const [shareCount, setShareCount] = useState(0);
-
-  const handleLike = useCallback(() => {
-    setIsLiked((prevIsLiked) => {
-      const nextIsLiked = !prevIsLiked;
-      setLikesCount(
-        (prevLikesCount) => prevLikesCount + (nextIsLiked ? 1 : -1),
-      );
-      return nextIsLiked;
-    });
-  }, []);
 
   return (
     <View>
@@ -129,51 +114,7 @@ export const PostDetailHeader = ({
 
       <ImageCarousel images={post.images} />
 
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          paddingHorizontal: 12,
-          paddingVertical: 8,
-        }}
-      >
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 14 }}>
-          <LikeButton isLiked={isLiked} colors={colors} onPress={handleLike} />
-          <ShareButton
-            postId={post.id}
-            username={post.user.username}
-            colors={colors}
-            onShareComplete={() =>
-              setShareCount((prevShareCount) => prevShareCount + 1)
-            }
-          />
-        </View>
-        <BookmarkButton
-          initialIsBookmarked={post.isBookmarked}
-          colors={colors}
-        />
-      </View>
-
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          gap: 8,
-          paddingHorizontal: 12,
-        }}
-      >
-        <TouchableOpacity onPress={() => router.push(`/likes/${post.id}`)}>
-          <Text style={{ fontWeight: '600', fontSize: 14, color: colors.text }}>
-            {likesCount.toLocaleString()} likes
-          </Text>
-        </TouchableOpacity>
-        {shareCount > 0 && (
-          <Text style={{ fontSize: 14, color: colors.icon }}>
-            · {shareCount} {shareCount === 1 ? 'share' : 'shares'}
-          </Text>
-        )}
-      </View>
+      <PostActionsBar post={post} colors={colors} />
 
       {post.caption.length > 0 && (
         <View style={{ paddingHorizontal: 12, paddingTop: 4 }}>
