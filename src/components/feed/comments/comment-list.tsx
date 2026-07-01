@@ -1,8 +1,8 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet } from 'react-native';
 
-import { FeedComment } from "@/data/mock-feed";
+import { FeedComment } from '@/data/mock-feed';
 
-import { CommentPreview } from "./comment-preview";
+import { CommentPreview } from './comment-preview';
 
 export const CommentList = ({
   comments,

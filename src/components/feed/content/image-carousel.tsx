@@ -1,9 +1,16 @@
-import { useState, useContext } from "react";
-import { ScrollView, View, Pressable, NativeSyntheticEvent, NativeScrollEvent, StyleSheet } from "react-native";
+import { useState, useContext } from 'react';
+import {
+  ScrollView,
+  View,
+  Pressable,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
+  StyleSheet,
+} from 'react-native';
 
-import { ColorsContext } from "@/context/colors-context";
-import { FeedImage } from "@/data/mock-feed";
-import { CarouselImage } from "./carousel-image";
+import { ColorsContext } from '@/context/colors-context';
+import { FeedImage } from '@/data/mock-feed';
+import { CarouselImage } from './carousel-image';
 
 const IMAGE_WIDTH = 400;
 
@@ -50,7 +57,7 @@ export const ImageCarousel = ({
                 styles.dot,
                 i === activeIndex
                   ? [styles.dotActive, { backgroundColor: colors.tint }]
-                  : { backgroundColor: colors.icon + "40" },
+                  : { backgroundColor: colors.icon + '40' },
               ]}
             />
           ))}
@@ -62,9 +69,9 @@ export const ImageCarousel = ({
 
 const styles = StyleSheet.create({
   dotsContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingVertical: 8,
     gap: 4,
   },
@@ -72,7 +79,7 @@ const styles = StyleSheet.create({
     width: 6,
     height: 6,
     borderRadius: 3,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   dotActive: {
     width: 8,

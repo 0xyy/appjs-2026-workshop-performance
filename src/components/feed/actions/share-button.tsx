@@ -1,14 +1,14 @@
-import { useCallback } from "react";
-import { TouchableOpacity, Share } from "react-native";
+import { useCallback } from 'react';
+import { TouchableOpacity, Share } from 'react-native';
 
-import { IconSymbol } from "@/components/ui/icon-symbol";
-import { Colors } from "@/constants/theme";
+import { IconSymbol } from '@/components/ui/icon-symbol';
+import { Colors } from '@/constants/theme';
 
 export function ShareButton({
   postId,
   username,
   colors,
-  onShareComplete
+  onShareComplete,
 }: {
   postId: string;
   username: string;
@@ -19,7 +19,7 @@ export function ShareButton({
     try {
       const result = await Share.share({
         message: `Check out this post by @${username}: https://example.com/post/${postId}`,
-        url: `https://example.com/post/${postId}`
+        url: `https://example.com/post/${postId}`,
       });
       if (result.action === Share.sharedAction) {
         onShareComplete();

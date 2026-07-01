@@ -1,6 +1,21 @@
-import Svg, { Path, G, Defs, ClipPath, LinearGradient, Stop } from "react-native-svg";
+import Svg, {
+  Path,
+  G,
+  Defs,
+  ClipPath,
+  LinearGradient,
+  Stop,
+} from 'react-native-svg';
 
-export const BookmarkIcon = ({ size, color, filled }: { size: number; color: string; filled: boolean }) => (
+export const BookmarkIcon = ({
+  size,
+  color,
+  filled,
+}: {
+  size: number;
+  color: string;
+  filled: boolean;
+}) => (
   <Svg width={size} height={size} viewBox="0 0 24 24">
     <Defs>
       <LinearGradient id="bookmarkGrad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -24,11 +39,7 @@ export const BookmarkIcon = ({ size, color, filled }: { size: number; color: str
             fill={color}
             fillOpacity={0.2}
           />
-          <Path
-            d="M7 3h10v12l-5-3.5L7 15V3z"
-            fill={color}
-            fillOpacity={0.1}
-          />
+          <Path d="M7 3h10v12l-5-3.5L7 15V3z" fill={color} fillOpacity={0.1} />
         </>
       ) : (
         <>

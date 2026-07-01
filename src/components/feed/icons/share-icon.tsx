@@ -1,4 +1,12 @@
-import Svg, { Path, G, Defs, ClipPath, LinearGradient, Stop, Circle } from "react-native-svg";
+import Svg, {
+  Path,
+  G,
+  Defs,
+  ClipPath,
+  LinearGradient,
+  Stop,
+  Circle,
+} from 'react-native-svg';
 
 export const ShareIcon = ({ size, color }: { size: number; color: string }) => (
   <Svg width={size} height={size} viewBox="0 0 24 24">
@@ -27,11 +35,7 @@ export const ShareIcon = ({ size, color }: { size: number; color: string }) => (
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <Path
-        d="M22 2L15 22l-4-9-9-4 20-7z"
-        fill={color}
-        fillOpacity={0.08}
-      />
+      <Path d="M22 2L15 22l-4-9-9-4 20-7z" fill={color} fillOpacity={0.08} />
       <Circle cx="22" cy="2" r="1.5" fill={color} fillOpacity={0.5} />
       <Circle cx="15" cy="22" r="1" fill={color} fillOpacity={0.4} />
       <Circle cx="2" cy="15" r="1" fill={color} fillOpacity={0.4} />

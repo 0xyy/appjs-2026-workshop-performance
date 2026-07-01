@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState } from 'react';
 import {
   FlatList,
   LayoutChangeEvent,
@@ -6,11 +6,11 @@ import {
   NativeSyntheticEvent,
   StyleSheet,
   View,
-} from "react-native";
+} from 'react-native';
 
-import { FeedItem } from "@/components/feed/feed-item";
-import { SuggestedPostsSection } from "@/components/feed/suggestions/suggested-posts-section";
-import { FeedListItem } from "@/data/mock-feed";
+import { FeedItem } from '@/components/feed/feed-item';
+import { SuggestedPostsSection } from '@/components/feed/suggestions/suggested-posts-section';
+import { FeedListItem } from '@/data/mock-feed';
 
 export const FeedList = ({
   data,
@@ -45,13 +45,13 @@ export const FeedList = ({
       </View>
       <FlatList
         data={data}
-        renderItem={({ item }) => (
-          item.type === "suggestions" ? (
+        renderItem={({ item }) =>
+          item.type === 'suggestions' ? (
             <SuggestedPostsSection posts={item.posts} />
           ) : (
             <FeedItem item={item} onLike={onLike} />
           )
-        )}
+        }
         keyExtractor={(_item, index) => String(index)}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.content}
@@ -77,10 +77,10 @@ const styles = StyleSheet.create({
   },
   progressTrack: {
     height: 3,
-    backgroundColor: "rgba(0, 0, 0, 0.06)",
+    backgroundColor: 'rgba(0, 0, 0, 0.06)',
   },
   progressFill: {
-    height: "100%",
-    backgroundColor: "#FF3B30",
+    height: '100%',
+    backgroundColor: '#FF3B30',
   },
 });

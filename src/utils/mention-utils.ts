@@ -1,4 +1,4 @@
-import { FeedComment, MOCK_FEED } from "@/data/mock-feed";
+import { FeedComment, MOCK_FEED } from '@/data/mock-feed';
 
 /**
  * Computes the Levenshtein edit distance between two strings.
@@ -8,7 +8,7 @@ function editDistance(a: string, b: string): number {
   const m = a.length;
   const n = b.length;
   const dp: number[][] = Array.from({ length: m + 1 }, () =>
-    Array(n + 1).fill(0)
+    Array(n + 1).fill(0),
   );
 
   for (let i = 0; i <= m; i++) dp[i][0] = i;
@@ -66,7 +66,7 @@ function collectRecentComments(): FeedComment[] {
  */
 export function buildMentionSuggestions(
   comments: FeedComment[],
-  newCommentText: string
+  newCommentText: string,
 ): { username: string; relevance: number }[] {
   // Collect comments from the current thread AND from the global feed
   // so we can suggest users who discuss similar topics elsewhere
@@ -125,7 +125,7 @@ export function buildMentionSuggestions(
 
     // Score based on username similarity to words in the new comment
     for (const word of newWords) {
-      const dist = editDistance(word.replace(/^@/, ""), username.toLowerCase());
+      const dist = editDistance(word.replace(/^@/, ''), username.toLowerCase());
       if (dist <= 2) {
         relevance += (10 - dist) * 3;
       }

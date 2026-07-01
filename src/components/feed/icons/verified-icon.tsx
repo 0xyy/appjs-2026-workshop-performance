@@ -1,6 +1,21 @@
-import Svg, { Path, G, Defs, ClipPath, RadialGradient, Stop, Circle, Polyline } from "react-native-svg";
+import Svg, {
+  Path,
+  G,
+  Defs,
+  ClipPath,
+  RadialGradient,
+  Stop,
+  Circle,
+  Polyline,
+} from 'react-native-svg';
 
-export const VerifiedIcon = ({ size, color }: { size: number; color: string }) => (
+export const VerifiedIcon = ({
+  size,
+  color,
+}: {
+  size: number;
+  color: string;
+}) => (
   <Svg width={size} height={size} viewBox="0 0 24 24">
     <Defs>
       <RadialGradient id="verifiedGrad" cx="50%" cy="50%" r="50%">
@@ -24,7 +39,15 @@ export const VerifiedIcon = ({ size, color }: { size: number; color: string }) =
         d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
         fill={`url(#verifiedGrad)`}
       />
-      <Circle cx="12" cy="12" r="6" fill="none" stroke="white" strokeWidth={0.3} strokeOpacity={0.4} />
+      <Circle
+        cx="12"
+        cy="12"
+        r="6"
+        fill="none"
+        stroke="white"
+        strokeWidth={0.3}
+        strokeOpacity={0.4}
+      />
       <Polyline
         points="8.5,12 11,14.5 15.5,9.5"
         fill="none"

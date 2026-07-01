@@ -1,8 +1,13 @@
-import { useEffect, useRef } from "react";
-import { useSharedValue, withTiming, useDerivedValue, type SharedValue } from "react-native-reanimated";
+import { useEffect, useRef } from 'react';
+import {
+  useSharedValue,
+  withTiming,
+  useDerivedValue,
+  type SharedValue,
+} from 'react-native-reanimated';
 
-import { FeedPost } from "@/data/mock-feed";
-import { lerpArrays, findPeakIndex, getPointX } from "./chart-utils";
+import { FeedPost } from '@/data/mock-feed';
+import { lerpArrays, findPeakIndex, getPointX } from './chart-utils';
 
 const ANIM_DURATION = 500;
 
@@ -26,9 +31,13 @@ export interface ChartAnimationResult {
   targetPeakX: SharedValue<number>;
 }
 
-export function useChartAnimation(post: FeedPost, days: number): ChartAnimationResult {
+export function useChartAnimation(
+  post: FeedPost,
+  days: number,
+): ChartAnimationResult {
   const likesData = post.chartData.likes[days] ?? post.chartData.likes[30];
-  const commentsData = post.chartData.comments[days] ?? post.chartData.comments[30];
+  const commentsData =
+    post.chartData.comments[days] ?? post.chartData.comments[30];
   const sharesData = post.chartData.shares[days] ?? post.chartData.shares[30];
   const maxLikes = Math.max(...likesData, 1);
   const maxComments = Math.max(...commentsData, 1);
@@ -94,14 +103,14 @@ export function useChartAnimation(post: FeedPost, days: number): ChartAnimationR
     prev: SharedValue<number[]>,
     target: SharedValue<number[]>,
     prevMax: SharedValue<number>,
-    targetMax: SharedValue<number>
+    targetMax: SharedValue<number>,
   ): AnimatedSeriesData {
     const data = useDerivedValue(() => {
-      "worklet";
+      'worklet';
       return lerpArrays(prev.value, target.value, progress.value);
     });
     const max = useDerivedValue(() => {
-      "worklet";
+      'worklet';
       return prevMax.value + (targetMax.value - prevMax.value) * progress.value;
     });
     return { data, max };
@@ -109,9 +118,24 @@ export function useChartAnimation(post: FeedPost, days: number): ChartAnimationR
 
   return {
     progress,
-    likes: useInterpolatedSeries(prevLikes, targetLikes, prevMaxLikes, targetMaxLikes),
-    comments: useInterpolatedSeries(prevComments, targetComments, prevMaxComments, targetMaxComments),
-    shares: useInterpolatedSeries(prevShares, targetShares, prevMaxShares, targetMaxShares),
+    likes: useInterpolatedSeries(
+      prevLikes,
+      targetLikes,
+      prevMaxLikes,
+      targetMaxLikes,
+    ),
+    comments: useInterpolatedSeries(
+      prevComments,
+      targetComments,
+      prevMaxComments,
+      targetMaxComments,
+    ),
+    shares: useInterpolatedSeries(
+      prevShares,
+      targetShares,
+      prevMaxShares,
+      targetMaxShares,
+    ),
     rawLikes: likesData,
     rawComments: commentsData,
     rawShares: sharesData,

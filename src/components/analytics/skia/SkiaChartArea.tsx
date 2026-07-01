@@ -1,7 +1,7 @@
-import { type ReactNode } from "react";
-import { Canvas } from "@shopify/react-native-skia";
+import { type ReactNode } from 'react';
+import { Canvas } from '@shopify/react-native-skia';
 
-import { CHART_WIDTH, CHART_HEIGHT } from "../chart-utils";
+import { CHART_WIDTH, CHART_HEIGHT } from '../chart-utils';
 
 interface SkiaChartAreaProps {
   bgColor: string;

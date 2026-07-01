@@ -1,14 +1,21 @@
-import { Platform } from "react-native";
-import { matchFont } from "@shopify/react-native-skia";
+import { Platform } from 'react-native';
+import { matchFont } from '@shopify/react-native-skia';
 
 // --- Shared fonts (used by both SVG and Skia for consistent measurement) ---
 
-const fontFamily = Platform.select({ ios: "Helvetica", default: "sans-serif" });
+const fontFamily = Platform.select({ ios: 'Helvetica', default: 'sans-serif' });
 export const labelFont = matchFont({ fontFamily: fontFamily!, fontSize: 9 });
-export const peakLabelFont = matchFont({ fontFamily: fontFamily!, fontSize: 8, fontWeight: "bold" as const });
+export const peakLabelFont = matchFont({
+  fontFamily: fontFamily!,
+  fontSize: 8,
+  fontWeight: 'bold' as const,
+});
 
-export function measureText(text: string, font: ReturnType<typeof matchFont> = labelFont): number {
-  "worklet";
+export function measureText(
+  text: string,
+  font: ReturnType<typeof matchFont> = labelFont,
+): number {
+  'worklet';
   return font.measureText(text).width;
 }
 
@@ -23,7 +30,7 @@ export const PLOT_H = CHART_HEIGHT - PADDING.top - PADDING.bottom;
 // --- Types ---
 
 /** Ordered back-to-front for rendering (first drawn = behind) */
-export const ALL_SERIES = ["shares", "comments", "likes"] as const;
+export const ALL_SERIES = ['shares', 'comments', 'likes'] as const;
 
 export type DataSeries = (typeof ALL_SERIES)[number];
 
@@ -44,62 +51,95 @@ export interface SeriesConfig {
 }
 
 export const SERIES_CONFIG: Record<DataSeries, SeriesConfig> = {
-  likes: { color: "#6C5CE7", starOuter: 4, starInner: 1.8, lineWidth: 2, gradientOpacity: [0.3, 0.02] },
-  comments: { color: "#00B894", starOuter: 3.5, starInner: 1.5, lineWidth: 1.5, gradientOpacity: [0.2, 0.01] },
-  shares: { color: "#FDCB6E", starOuter: 3.5, starInner: 1.5, lineWidth: 1.5, gradientOpacity: [0.25, 0.02] },
+  likes: {
+    color: '#6C5CE7',
+    starOuter: 4,
+    starInner: 1.8,
+    lineWidth: 2,
+    gradientOpacity: [0.3, 0.02],
+  },
+  comments: {
+    color: '#00B894',
+    starOuter: 3.5,
+    starInner: 1.5,
+    lineWidth: 1.5,
+    gradientOpacity: [0.2, 0.01],
+  },
+  shares: {
+    color: '#FDCB6E',
+    starOuter: 3.5,
+    starInner: 1.5,
+    lineWidth: 1.5,
+    gradientOpacity: [0.25, 0.02],
+  },
 };
 
 // --- Path string builders (worklet-safe) ---
 
 export function buildLinePath(data: number[], maxVal: number): string {
-  "worklet";
-  if (data.length === 0) return "";
+  'worklet';
+  if (data.length === 0) return '';
   const stepX = PLOT_W / (data.length - 1);
   return data
     .map((val, i) => {
       const x = PADDING.left + i * stepX;
       const y = PADDING.top + PLOT_H - (val / maxVal) * PLOT_H;
-      return `${i === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`;
+      return `${i === 0 ? 'M' : 'L'} ${x.toFixed(1)} ${y.toFixed(1)}`;
     })
-    .join(" ");
+    .join(' ');
 }
 
 export function buildAreaPath(data: number[], maxVal: number): string {
-  "worklet";
+  'worklet';
   const line = buildLinePath(data, maxVal);
-  if (!line) return "";
+  if (!line) return '';
   const stepX = PLOT_W / (data.length - 1);
   const lastX = PADDING.left + (data.length - 1) * stepX;
   const baseline = PADDING.top + PLOT_H;
   return `${line} L ${lastX.toFixed(1)} ${baseline} L ${PADDING.left} ${baseline} Z`;
 }
 
-export function starPath(cx: number, cy: number, outerR: number, innerR: number, pts = 5): string {
-  "worklet";
+export function starPath(
+  cx: number,
+  cy: number,
+  outerR: number,
+  innerR: number,
+  pts = 5,
+): string {
+  'worklet';
   const step = Math.PI / pts;
-  return Array.from({ length: 2 * pts }, (_, i) => {
-    const r = i % 2 === 0 ? outerR : innerR;
-    const angle = i * step - Math.PI / 2;
-    const x = cx + r * Math.cos(angle);
-    const y = cy + r * Math.sin(angle);
-    return `${i === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`;
-  }).join(" ") + " Z";
+  return (
+    Array.from({ length: 2 * pts }, (_, i) => {
+      const r = i % 2 === 0 ? outerR : innerR;
+      const angle = i * step - Math.PI / 2;
+      const x = cx + r * Math.cos(angle);
+      const y = cy + r * Math.sin(angle);
+      return `${i === 0 ? 'M' : 'L'} ${x.toFixed(1)} ${y.toFixed(1)}`;
+    }).join(' ') + ' Z'
+  );
 }
 
-export function buildStarsPath(data: number[], maxVal: number, outerR: number, innerR: number): string {
-  "worklet";
+export function buildStarsPath(
+  data: number[],
+  maxVal: number,
+  outerR: number,
+  innerR: number,
+): string {
+  'worklet';
   const stepX = PLOT_W / (data.length - 1);
-  return data.map((val, i) => {
-    const cx = PADDING.left + i * stepX;
-    const cy = PADDING.top + PLOT_H - (val / maxVal) * PLOT_H;
-    return starPath(cx, cy, outerR, innerR);
-  }).join(" ");
+  return data
+    .map((val, i) => {
+      const cx = PADDING.left + i * stepX;
+      const cy = PADDING.top + PLOT_H - (val / maxVal) * PLOT_H;
+      return starPath(cx, cy, outerR, innerR);
+    })
+    .join(' ');
 }
 
 // --- Math helpers (worklet-safe) ---
 
 export function lerpArrays(a: number[], b: number[], t: number): number[] {
-  "worklet";
+  'worklet';
   const longer = a.length >= b.length ? a : b;
   return longer.map((_, i) => {
     const va = i < a.length ? a[i] : 0;
@@ -109,14 +149,18 @@ export function lerpArrays(a: number[], b: number[], t: number): number[] {
 }
 
 export function getPointX(index: number, total: number): number {
-  "worklet";
+  'worklet';
   const stepX = PLOT_W / (total - 1);
   return PADDING.left + index * stepX;
 }
 
 /** Interpolate Y value from data at a fractional X position */
-export function sampleDataAtX(data: number[], maxVal: number, x: number): number {
-  "worklet";
+export function sampleDataAtX(
+  data: number[],
+  maxVal: number,
+  x: number,
+): number {
+  'worklet';
   if (data.length === 0) return PADDING.top + PLOT_H;
   const stepX = PLOT_W / (data.length - 1);
   const fractionalIdx = (x - PADDING.left) / stepX;
@@ -128,37 +172,41 @@ export function sampleDataAtX(data: number[], maxVal: number, x: number): number
 }
 
 export function findPeakIndex(data: number[]): number {
-  "worklet";
-  return data.reduce((bestIdx, val, i) => (val > data[bestIdx] ? i : bestIdx), 0);
+  'worklet';
+  return data.reduce(
+    (bestIdx, val, i) => (val > data[bestIdx] ? i : bestIdx),
+    0,
+  );
 }
 
 export function findPeakValue(data: number[]): number {
-  "worklet";
+  'worklet';
   return data.reduce((best, val) => (val > best ? val : best), 0);
 }
 
 export function formatLabel(val: number): string {
-  "worklet";
-  return val > 999 ? (val / 1000).toFixed(1) + "k" : Math.round(val).toString();
+  'worklet';
+  return val > 999 ? (val / 1000).toFixed(1) + 'k' : Math.round(val).toString();
 }
 
 // --- Grid helpers ---
 
 export function getGridYs(lines = 4): number[] {
-  return Array.from({ length: lines }, (_, i) =>
-    PADDING.top + (PLOT_H / (lines - 1)) * i
+  return Array.from(
+    { length: lines },
+    (_, i) => PADDING.top + (PLOT_H / (lines - 1)) * i,
   );
 }
 
 export function getGridLabels(maxVal: number, lines = 4): number[] {
   return Array.from({ length: lines }, (_, i) =>
-    Math.round(maxVal * (1 - i / (lines - 1)))
+    Math.round(maxVal * (1 - i / (lines - 1))),
   );
 }
 
 export function getXLabelIndices(dataLength: number, count = 4): number[] {
   if (dataLength <= 1) return [0];
   return Array.from({ length: count }, (_, i) =>
-    Math.round((i / (count - 1)) * (dataLength - 1))
+    Math.round((i / (count - 1)) * (dataLength - 1)),
   );
 }

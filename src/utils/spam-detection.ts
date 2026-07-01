@@ -1,4 +1,4 @@
-import { FeedComment, MOCK_FEED } from "@/data/mock-feed";
+import { FeedComment, MOCK_FEED } from '@/data/mock-feed';
 
 /**
  * Tokenizes text into lowercase words, filtering out short stop words.
@@ -57,7 +57,7 @@ function buildTermFrequency(words: string[]): Map<string, number> {
  */
 function cosineSimilarity(
   tfA: Map<string, number>,
-  tfB: Map<string, number>
+  tfB: Map<string, number>,
 ): number {
   // Build the full union of all keys from both vectors
   const allKeys = new Set<string>();
@@ -102,7 +102,7 @@ function cosineSimilarity(
  */
 export function detectSpam(
   newText: string,
-  threadComments: FeedComment[]
+  threadComments: FeedComment[],
 ): { isSpam: boolean; maxSimilarity: number } {
   const newWords = tokenize(newText);
   if (newWords.length === 0) return { isSpam: false, maxSimilarity: 0 };

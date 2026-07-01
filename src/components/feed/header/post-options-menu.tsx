@@ -1,13 +1,22 @@
-import { useContext, useState } from "react";
-import { Text, TouchableOpacity, Modal, Pressable, Alert, Share, Dimensions, StyleSheet } from "react-native";
-import * as Clipboard from "expo-clipboard";
-import * as Haptics from "expo-haptics";
-import { useRouter } from "expo-router";
+import { useContext, useState } from 'react';
+import {
+  Text,
+  TouchableOpacity,
+  Modal,
+  Pressable,
+  Alert,
+  Share,
+  Dimensions,
+  StyleSheet,
+} from 'react-native';
+import * as Clipboard from 'expo-clipboard';
+import * as Haptics from 'expo-haptics';
+import { useRouter } from 'expo-router';
 
-import { ColorsContext } from "@/context/colors-context";
-import { MenuIcon } from "@/components/feed/icons/menu-icon";
+import { ColorsContext } from '@/context/colors-context';
+import { MenuIcon } from '@/components/feed/icons/menu-icon';
 
-const { width: SCREEN_WIDTH } = Dimensions.get("window");
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const POPOVER_WIDTH = 220;
 
 interface PostOptionsMenuProps {
@@ -19,7 +28,7 @@ interface PostOptionsMenuProps {
   anchorPosition?: { x: number; y: number };
 }
 
-type MenuIconName = "bell" | "link" | "share" | "person" | "eye-slash" | "flag";
+type MenuIconName = 'bell' | 'link' | 'share' | 'person' | 'eye-slash' | 'flag';
 
 interface MenuOption {
   icon: MenuIconName;
@@ -43,7 +52,7 @@ export const PostOptionsMenu = ({
   const handleCopyLink = async () => {
     await Clipboard.setStringAsync(`https://example.com/post/${postId}`);
     await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-    Alert.alert("Link Copied", "Post link has been copied to clipboard");
+    Alert.alert('Link Copied', 'Post link has been copied to clipboard');
     onClose();
   };
 
@@ -62,9 +71,11 @@ export const PostOptionsMenu = ({
   const handleReport = () => {
     setIsReported(true);
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
-    Alert.alert("Post Reported", "Thank you for your feedback. We will review this post.", [
-      { text: "OK", onPress: onClose },
-    ]);
+    Alert.alert(
+      'Post Reported',
+      'Thank you for your feedback. We will review this post.',
+      [{ text: 'OK', onPress: onClose }],
+    );
   };
 
   const handleNotInterested = () => {
@@ -72,7 +83,9 @@ export const PostOptionsMenu = ({
     if (onHidePost) {
       onHidePost();
     }
-    Alert.alert("Got it", "We will show you fewer posts like this.", [{ text: "OK", onPress: onClose }]);
+    Alert.alert('Got it', 'We will show you fewer posts like this.', [
+      { text: 'OK', onPress: onClose },
+    ]);
   };
 
   const handleAboutAccount = () => {
@@ -82,33 +95,60 @@ export const PostOptionsMenu = ({
 
   const handleTurnOnNotifications = () => {
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-    Alert.alert("Notifications On", `You will now receive notifications when @${username} posts.`, [
-      { text: "OK", onPress: onClose },
-    ]);
+    Alert.alert(
+      'Notifications On',
+      `You will now receive notifications when @${username} posts.`,
+      [{ text: 'OK', onPress: onClose }],
+    );
   };
 
   const menuOptions: MenuOption[] = [
-    { icon: "bell", label: "Notifications", onPress: handleTurnOnNotifications },
-    { icon: "link", label: "Copy link", onPress: handleCopyLink },
-    { icon: "share", label: "Share", onPress: handleShare },
-    { icon: "person", label: "About account", onPress: handleAboutAccount },
-    { icon: "eye-slash", label: "Not interested", onPress: handleNotInterested },
-    { icon: "flag", label: isReported ? "Reported" : "Report", onPress: handleReport, destructive: true },
+    {
+      icon: 'bell',
+      label: 'Notifications',
+      onPress: handleTurnOnNotifications,
+    },
+    { icon: 'link', label: 'Copy link', onPress: handleCopyLink },
+    { icon: 'share', label: 'Share', onPress: handleShare },
+    { icon: 'person', label: 'About account', onPress: handleAboutAccount },
+    {
+      icon: 'eye-slash',
+      label: 'Not interested',
+      onPress: handleNotInterested,
+    },
+    {
+      icon: 'flag',
+      label: isReported ? 'Reported' : 'Report',
+      onPress: handleReport,
+      destructive: true,
+    },
   ];
 
   const popoverLeft = anchorPosition
-    ? Math.min(Math.max(anchorPosition.x - POPOVER_WIDTH + 20, 16), SCREEN_WIDTH - POPOVER_WIDTH - 16)
+    ? Math.min(
+        Math.max(anchorPosition.x - POPOVER_WIDTH + 20, 16),
+        SCREEN_WIDTH - POPOVER_WIDTH - 16,
+      )
     : SCREEN_WIDTH - POPOVER_WIDTH - 16;
   const popoverTop = anchorPosition ? anchorPosition.y + 10 : 100;
 
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
+    <Modal
+      visible={visible}
+      transparent
+      animationType="fade"
+      onRequestClose={onClose}
+    >
       <Pressable style={styles.backdrop} onPress={onClose}>
         <Pressable
           style={[
             styles.popover,
             shadowStyles.popoverShadow,
-            { top: popoverTop, left: popoverLeft, backgroundColor: colors.cardBackground },
+            {
+              top: popoverTop,
+              left: popoverLeft,
+              backgroundColor: colors.cardBackground,
+            },
           ]}
           onPress={(e) => e.stopPropagation()}
         >
@@ -120,12 +160,21 @@ export const PostOptionsMenu = ({
                 styles.menuItem,
                 {
                   borderBottomWidth: index < menuOptions.length - 1 ? 0.5 : 0,
-                  borderBottomColor: colors.icon + "20",
+                  borderBottomColor: colors.icon + '20',
                 },
               ]}
             >
-              <MenuIcon name={option.icon} size={18} color={option.destructive ? "#FF6B6B" : colors.text} />
-              <Text style={[styles.menuLabel, { color: option.destructive ? "#FF6B6B" : colors.text }]}>
+              <MenuIcon
+                name={option.icon}
+                size={18}
+                color={option.destructive ? '#FF6B6B' : colors.text}
+              />
+              <Text
+                style={[
+                  styles.menuLabel,
+                  { color: option.destructive ? '#FF6B6B' : colors.text },
+                ]}
+              >
                 {option.label}
               </Text>
             </TouchableOpacity>
@@ -139,17 +188,17 @@ export const PostOptionsMenu = ({
 const styles = StyleSheet.create({
   backdrop: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.3)",
+    backgroundColor: 'rgba(0,0,0,0.3)',
   },
   popover: {
-    position: "absolute",
+    position: 'absolute',
     width: POPOVER_WIDTH,
     borderRadius: 12,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   menuItem: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingVertical: 14,
     paddingHorizontal: 16,
     gap: 12,
@@ -162,7 +211,7 @@ const styles = StyleSheet.create({
 
 const shadowStyles = StyleSheet.create({
   popoverShadow: {
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.25,
     shadowRadius: 12,

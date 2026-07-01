@@ -1,18 +1,18 @@
-import { useState, useContext } from "react";
-import { View, StyleSheet } from "react-native";
-import { useRouter } from "expo-router";
+import { useState, useContext } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
 
-import { ColorsContext } from "@/context/colors-context";
-import { FeedPostSlim } from "@/data/mock-feed";
+import { ColorsContext } from '@/context/colors-context';
+import { FeedPostSlim } from '@/data/mock-feed';
 
-import { ActionButtons } from "./actions/action-buttons";
-import { CommentList } from "./comments/comment-list";
-import { CommentsLink } from "./comments/comments-link";
-import { ImageCarousel } from "./content/image-carousel";
-import { PostCaption } from "./content/post-caption";
-import { PostTimestamp } from "./content/post-timestamp";
-import { TagList } from "./content/tag-list";
-import { PostHeader } from "./header/post-header";
+import { ActionButtons } from './actions/action-buttons';
+import { CommentList } from './comments/comment-list';
+import { CommentsLink } from './comments/comments-link';
+import { ImageCarousel } from './content/image-carousel';
+import { PostCaption } from './content/post-caption';
+import { PostTimestamp } from './content/post-timestamp';
+import { TagList } from './content/tag-list';
+import { PostHeader } from './header/post-header';
 
 export const FeedItem = ({
   item,

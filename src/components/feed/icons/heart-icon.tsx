@@ -1,6 +1,21 @@
-import Svg, { Path, G, Defs, ClipPath, RadialGradient, Stop } from "react-native-svg";
+import Svg, {
+  Path,
+  G,
+  Defs,
+  ClipPath,
+  RadialGradient,
+  Stop,
+} from 'react-native-svg';
 
-export const HeartIcon = ({ size, color, filled }: { size: number; color: string; filled: boolean }) => (
+export const HeartIcon = ({
+  size,
+  color,
+  filled,
+}: {
+  size: number;
+  color: string;
+  filled: boolean;
+}) => (
   <Svg width={size} height={size} viewBox="0 0 24 24">
     <Defs>
       <RadialGradient id="heartGrad" cx="50%" cy="50%" r="50%">

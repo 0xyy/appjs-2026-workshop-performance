@@ -1,8 +1,8 @@
-import { useContext } from "react";
-import { Text, TouchableOpacity, StyleSheet } from "react-native";
-import { useRouter } from "expo-router";
+import { useContext } from 'react';
+import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
 
-import { ColorsContext } from "@/context/colors-context";
+import { ColorsContext } from '@/context/colors-context';
 
 export const CommentsLink = ({
   totalComments,
@@ -23,7 +23,9 @@ export const CommentsLink = ({
   return (
     <TouchableOpacity onPress={openComments}>
       <Text style={[styles.text, { color: colors.icon }]}>
-        {totalComments === 1 ? "View 1 comment" : `View all ${totalComments} comments`}
+        {totalComments === 1
+          ? 'View 1 comment'
+          : `View all ${totalComments} comments`}
       </Text>
     </TouchableOpacity>
   );

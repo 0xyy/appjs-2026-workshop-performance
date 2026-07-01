@@ -1,6 +1,20 @@
-import Svg, { Path, G, Defs, ClipPath, LinearGradient, Stop, Circle } from "react-native-svg";
+import Svg, {
+  Path,
+  G,
+  Defs,
+  ClipPath,
+  LinearGradient,
+  Stop,
+  Circle,
+} from 'react-native-svg';
 
-export const CommentIcon = ({ size, color }: { size: number; color: string }) => (
+export const CommentIcon = ({
+  size,
+  color,
+}: {
+  size: number;
+  color: string;
+}) => (
   <Svg width={size} height={size} viewBox="0 0 24 24">
     <Defs>
       <LinearGradient id="commentGrad" x1="0%" y1="0%" x2="100%" y2="100%">

@@ -1,4 +1,4 @@
-import { FeedPost, MOCK_FEED } from "@/data/mock-feed";
+import { FeedPost, MOCK_FEED } from '@/data/mock-feed';
 
 /**
  * Computes the Jaccard similarity between two sets represented as arrays.
@@ -16,7 +16,10 @@ function jaccardSimilarity(a: string[], b: string[]): number {
 }
 
 /** Builds a term-frequency map and its squared magnitude in one pass. */
-function buildTFVector(words: string[]): { freq: Map<string, number>; magSq: number } {
+function buildTFVector(words: string[]): {
+  freq: Map<string, number>;
+  magSq: number;
+} {
   const freq = new Map<string, number>();
   for (const w of words) freq.set(w, (freq.get(w) || 0) + 1);
   let magSq = 0;
@@ -31,12 +34,13 @@ function buildTFVector(words: string[]): { freq: Map<string, number>; magSq: num
  */
 function cosineSimilarityTF(
   a: { freq: Map<string, number>; magSq: number },
-  b: { freq: Map<string, number>; magSq: number }
+  b: { freq: Map<string, number>; magSq: number },
 ): number {
   if (a.magSq === 0 || b.magSq === 0) return 0;
 
   // Iterate over the smaller map for dot product
-  const [smaller, larger] = a.freq.size <= b.freq.size ? [a.freq, b.freq] : [b.freq, a.freq];
+  const [smaller, larger] =
+    a.freq.size <= b.freq.size ? [a.freq, b.freq] : [b.freq, a.freq];
 
   let dotProduct = 0;
   for (const [term, count] of smaller) {
@@ -46,7 +50,9 @@ function cosineSimilarityTF(
     }
   }
 
-  return dotProduct === 0 ? 0 : dotProduct / (Math.sqrt(a.magSq) * Math.sqrt(b.magSq));
+  return dotProduct === 0
+    ? 0
+    : dotProduct / (Math.sqrt(a.magSq) * Math.sqrt(b.magSq));
 }
 
 /**
@@ -54,18 +60,115 @@ function cosineSimilarityTF(
  * instead of on every tokenize() call.
  */
 const STOP_WORDS = new Set([
-  "the", "a", "an", "is", "are", "was", "were", "be", "been", "being",
-  "have", "has", "had", "do", "does", "did", "will", "would", "could",
-  "should", "may", "might", "shall", "can", "to", "of", "in", "for",
-  "on", "with", "at", "by", "from", "as", "into", "through", "during",
-  "before", "after", "above", "below", "between", "out", "off", "over",
-  "under", "again", "further", "then", "once", "and", "but", "or", "nor",
-  "not", "so", "yet", "both", "either", "neither", "each", "every", "all",
-  "any", "few", "more", "most", "other", "some", "such", "no", "only",
-  "own", "same", "than", "too", "very", "just", "because", "if", "when",
-  "where", "how", "what", "which", "who", "whom", "this", "that", "these",
-  "those", "i", "me", "my", "we", "our", "you", "your", "he", "him",
-  "his", "she", "her", "it", "its", "they", "them", "their", "about",
+  'the',
+  'a',
+  'an',
+  'is',
+  'are',
+  'was',
+  'were',
+  'be',
+  'been',
+  'being',
+  'have',
+  'has',
+  'had',
+  'do',
+  'does',
+  'did',
+  'will',
+  'would',
+  'could',
+  'should',
+  'may',
+  'might',
+  'shall',
+  'can',
+  'to',
+  'of',
+  'in',
+  'for',
+  'on',
+  'with',
+  'at',
+  'by',
+  'from',
+  'as',
+  'into',
+  'through',
+  'during',
+  'before',
+  'after',
+  'above',
+  'below',
+  'between',
+  'out',
+  'off',
+  'over',
+  'under',
+  'again',
+  'further',
+  'then',
+  'once',
+  'and',
+  'but',
+  'or',
+  'nor',
+  'not',
+  'so',
+  'yet',
+  'both',
+  'either',
+  'neither',
+  'each',
+  'every',
+  'all',
+  'any',
+  'few',
+  'more',
+  'most',
+  'other',
+  'some',
+  'such',
+  'no',
+  'only',
+  'own',
+  'same',
+  'than',
+  'too',
+  'very',
+  'just',
+  'because',
+  'if',
+  'when',
+  'where',
+  'how',
+  'what',
+  'which',
+  'who',
+  'whom',
+  'this',
+  'that',
+  'these',
+  'those',
+  'i',
+  'me',
+  'my',
+  'we',
+  'our',
+  'you',
+  'your',
+  'he',
+  'him',
+  'his',
+  'she',
+  'her',
+  'it',
+  'its',
+  'they',
+  'them',
+  'their',
+  'about',
 ]);
 
 /**
@@ -75,9 +178,9 @@ const STOP_WORDS = new Set([
 function tokenize(text: string): string[] {
   return text
     .toLowerCase()
-    .replace(/[^a-z0-9\s]/g, " ")
+    .replace(/[^a-z0-9\s]/g, ' ')
     .split(/\s+/)
-    .filter(w => w.length > 2 && !STOP_WORDS.has(w));
+    .filter((w) => w.length > 2 && !STOP_WORDS.has(w));
 }
 
 /**
@@ -101,8 +204,10 @@ function collectCommentWords(post: FeedPost): string[] {
  * Computes the Haversine distance in km between two lat/lng coordinates.
  */
 function haversineDistance(
-  lat1: number, lng1: number,
-  lat2: number, lng2: number
+  lat1: number,
+  lng1: number,
+  lat2: number,
+  lng2: number,
 ): number {
   const R = 6371;
   const dLat = ((lat2 - lat1) * Math.PI) / 180;
@@ -110,8 +215,9 @@ function haversineDistance(
   const a =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
     Math.cos((lat1 * Math.PI) / 180) *
-    Math.cos((lat2 * Math.PI) / 180) *
-    Math.sin(dLng / 2) * Math.sin(dLng / 2);
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLng / 2) *
+      Math.sin(dLng / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;
 }
@@ -136,7 +242,7 @@ function getCandidateCache(): Map<string, CandidateCache> {
   if (candidateCache) return candidateCache;
   candidateCache = new Map();
   for (const post of MOCK_FEED) {
-    const tags = post.tags.map(t => t.toLowerCase());
+    const tags = post.tags.map((t) => t.toLowerCase());
     candidateCache.set(post.id, {
       tags,
       tagSet: new Set(tags),
@@ -164,11 +270,11 @@ function getCandidateCache(): Map<string, CandidateCache> {
  */
 export function findRelatedPosts(
   currentPost: FeedPost,
-  limit: number = 6
+  limit: number = 6,
 ): RelatedPostResult[] {
   const cache = getCandidateCache();
 
-  const currentTags = currentPost.tags.map(t => t.toLowerCase());
+  const currentTags = currentPost.tags.map((t) => t.toLowerCase());
   const currentCaptionTF = buildTFVector(tokenize(currentPost.caption));
   const currentCommentTF = buildTFVector(collectCommentWords(currentPost));
 
@@ -198,7 +304,7 @@ export function findRelatedPosts(
     const captionSim = cosineSimilarityTF(currentCaptionTF, cached.captionTF);
     if (captionSim > 0.05) {
       score += captionSim * 25;
-      reasons.push("similar caption");
+      reasons.push('similar caption');
     }
 
     // 3. Comment topic similarity (weight: 20)
@@ -213,24 +319,25 @@ export function findRelatedPosts(
         currentPost.location.coordinates.latitude,
         currentPost.location.coordinates.longitude,
         candidate.location.coordinates.latitude,
-        candidate.location.coordinates.longitude
+        candidate.location.coordinates.longitude,
       );
       const proxScore = Math.max(0, 1 - dist / 500); // decay over 500km
       if (proxScore > 0.1) {
         score += proxScore * 15;
-        reasons.push("nearby");
+        reasons.push('nearby');
       }
     }
 
     // 5. Engagement similarity (weight: 5)
-    const engagementDiff = Math.abs(currentPost.likes - candidate.likes) /
+    const engagementDiff =
+      Math.abs(currentPost.likes - candidate.likes) /
       Math.max(currentPost.likes, candidate.likes, 1);
     score += (1 - engagementDiff) * 5;
 
     // 6. Same author boost (weight: 10)
     if (candidate.user.username === currentPost.user.username) {
       score += 10;
-      reasons.push("same author");
+      reasons.push('same author');
     }
 
     if (score > 0) {

@@ -6,7 +6,7 @@ export interface UserBadge {
   icon: string;
   earnedAt: string;
   description: string;
-  rarity: "common" | "rare" | "epic" | "legendary";
+  rarity: 'common' | 'rare' | 'epic' | 'legendary';
 }
 
 export interface UserStats {
@@ -24,14 +24,14 @@ export interface UserStats {
 
 export interface Reaction {
   type:
-    | "like"
-    | "love"
-    | "laugh"
-    | "wow"
-    | "sad"
-    | "angry"
-    | "celebrate"
-    | "insightful";
+    | 'like'
+    | 'love'
+    | 'laugh'
+    | 'wow'
+    | 'sad'
+    | 'angry'
+    | 'celebrate'
+    | 'insightful';
   count: number;
   users: { username: string; avatar: string; timestamp: string }[];
 }
@@ -41,7 +41,7 @@ export interface Share {
   username: string;
   avatar: string;
   sharedAt: string;
-  platform: "feed" | "story" | "dm" | "external";
+  platform: 'feed' | 'story' | 'dm' | 'external';
   message?: string;
 }
 
@@ -159,7 +159,7 @@ export interface FeedComment {
   editedAt?: string;
   isPinned?: boolean;
   isCreatorReply?: boolean;
-  sentiment?: "positive" | "neutral" | "negative";
+  sentiment?: 'positive' | 'neutral' | 'negative';
   language?: string;
 }
 
@@ -228,7 +228,7 @@ export interface FeedPost {
   editHistory?: { editedAt: string; previousCaption: string }[];
   scheduledAt?: string;
   expiresAt?: string;
-  visibility: "public" | "followers" | "close_friends" | "private";
+  visibility: 'public' | 'followers' | 'close_friends' | 'private';
   allowComments: boolean;
   allowShares: boolean;
   contentWarning?: string;
@@ -249,324 +249,324 @@ export interface FeedPost {
 }
 
 const usernames = [
-  "appjs_conf",
-  "code_craftsman",
-  "expo_explorer",
-  "react_ninja",
-  "dev_pioneer",
-  "mobile_maestro",
-  "async_adventurer",
-  "stack_surfer",
-  "pixel_pusher",
-  "bug_buster",
-  "type_wizard",
-  "speaker_circle",
-  "mobile_dev_pro",
-  "rn_community",
-  "krakow_tech",
-  "workshop_lead",
-  "animations_guru",
-  "perf_optimizer",
-  "native_builder",
-  "attendee_dev",
-  "js_junkie",
-  "swift_sage",
-  "kotlin_king",
-  "flutter_fan",
-  "web_warrior",
-  "api_architect",
-  "db_designer",
-  "cloud_coder",
-  "devops_dude",
-  "security_sage",
-  "ux_unicorn",
-  "ui_master",
-  "frontend_fury",
-  "backend_boss",
-  "fullstack_flex",
-  "open_source_hero",
-  "git_genius",
-  "docker_dev",
-  "k8s_captain",
-  "aws_ace",
-  "gcp_guru",
-  "azure_admin",
-  "node_ninja",
-  "python_pro",
-  "rust_ranger",
-  "go_getter",
-  "java_jester",
-  "cpp_champion",
-  "ruby_rebel",
-  "scala_star",
-  "elm_enthusiast",
-  "clojure_coder",
-  "haskell_hacker",
-  "elixir_expert",
-  "phoenix_phenom",
-  "rails_rider",
-  "django_dev",
-  "flask_friend",
-  "fastapi_fan",
-  "graphql_god",
-  "rest_rockstar",
-  "grpc_guru",
-  "websocket_wizard",
-  "mqtt_master",
-  "kafka_king",
-  "redis_ranger",
-  "mongo_maven",
-  "postgres_pro",
-  "mysql_mage",
-  "sqlite_sage",
-  "firebase_fan",
-  "supabase_star",
-  "prisma_pro",
-  "drizzle_dev",
-  "typeorm_titan",
-  "jest_jockey",
-  "vitest_victor",
-  "cypress_champ",
-  "playwright_pro",
-  "selenium_sage",
-  "webpack_wizard",
-  "vite_victor",
-  "esbuild_expert",
-  "rollup_rider",
-  "parcel_pro",
-  "tailwind_titan",
-  "styled_star",
-  "emotion_expert",
-  "chakra_champ",
-  "mui_master",
-  "framer_fan",
-  "gsap_guru",
-  "lottie_lover",
-  "rive_rider",
-  "spine_star",
-  "three_titan",
-  "babylon_boss",
-  "pixi_pro",
-  "phaser_phenom",
-  "unity_unicorn",
-  "unreal_uber",
-  "godot_guru",
-  "cocos_captain",
-  "defold_dev",
-  "love2d_lover",
-  "electron_expert",
-  "tauri_titan",
-  "wails_wizard",
-  "neutralino_ninja",
-  "nw_master",
-  "pwa_pro",
-  "service_worker_sage",
-  "workbox_wizard",
-  "lighthouse_leader",
-  "web_vitals_victor",
+  'appjs_conf',
+  'code_craftsman',
+  'expo_explorer',
+  'react_ninja',
+  'dev_pioneer',
+  'mobile_maestro',
+  'async_adventurer',
+  'stack_surfer',
+  'pixel_pusher',
+  'bug_buster',
+  'type_wizard',
+  'speaker_circle',
+  'mobile_dev_pro',
+  'rn_community',
+  'krakow_tech',
+  'workshop_lead',
+  'animations_guru',
+  'perf_optimizer',
+  'native_builder',
+  'attendee_dev',
+  'js_junkie',
+  'swift_sage',
+  'kotlin_king',
+  'flutter_fan',
+  'web_warrior',
+  'api_architect',
+  'db_designer',
+  'cloud_coder',
+  'devops_dude',
+  'security_sage',
+  'ux_unicorn',
+  'ui_master',
+  'frontend_fury',
+  'backend_boss',
+  'fullstack_flex',
+  'open_source_hero',
+  'git_genius',
+  'docker_dev',
+  'k8s_captain',
+  'aws_ace',
+  'gcp_guru',
+  'azure_admin',
+  'node_ninja',
+  'python_pro',
+  'rust_ranger',
+  'go_getter',
+  'java_jester',
+  'cpp_champion',
+  'ruby_rebel',
+  'scala_star',
+  'elm_enthusiast',
+  'clojure_coder',
+  'haskell_hacker',
+  'elixir_expert',
+  'phoenix_phenom',
+  'rails_rider',
+  'django_dev',
+  'flask_friend',
+  'fastapi_fan',
+  'graphql_god',
+  'rest_rockstar',
+  'grpc_guru',
+  'websocket_wizard',
+  'mqtt_master',
+  'kafka_king',
+  'redis_ranger',
+  'mongo_maven',
+  'postgres_pro',
+  'mysql_mage',
+  'sqlite_sage',
+  'firebase_fan',
+  'supabase_star',
+  'prisma_pro',
+  'drizzle_dev',
+  'typeorm_titan',
+  'jest_jockey',
+  'vitest_victor',
+  'cypress_champ',
+  'playwright_pro',
+  'selenium_sage',
+  'webpack_wizard',
+  'vite_victor',
+  'esbuild_expert',
+  'rollup_rider',
+  'parcel_pro',
+  'tailwind_titan',
+  'styled_star',
+  'emotion_expert',
+  'chakra_champ',
+  'mui_master',
+  'framer_fan',
+  'gsap_guru',
+  'lottie_lover',
+  'rive_rider',
+  'spine_star',
+  'three_titan',
+  'babylon_boss',
+  'pixi_pro',
+  'phaser_phenom',
+  'unity_unicorn',
+  'unreal_uber',
+  'godot_guru',
+  'cocos_captain',
+  'defold_dev',
+  'love2d_lover',
+  'electron_expert',
+  'tauri_titan',
+  'wails_wizard',
+  'neutralino_ninja',
+  'nw_master',
+  'pwa_pro',
+  'service_worker_sage',
+  'workbox_wizard',
+  'lighthouse_leader',
+  'web_vitals_victor',
 ];
 
 const bios = [
-  "Building the future with React Native 🚀",
-  "Mobile dev | Open source contributor | Coffee enthusiast ☕",
-  "Creating beautiful apps one component at a time",
-  "Expo advocate | Performance obsessed | Speaker",
-  "TypeScript purist | Animation lover | Bug hunter 🐛",
-  "10+ years in mobile | Now all-in on React Native",
-  "From native to cross-platform | No regrets ⚛️",
-  "Workshop instructor | Conference speaker | Code reviewer",
-  "Building apps for millions of users",
-  "Startup founder turned developer advocate",
-  "Making complex things simple since 2015",
-  "App.js Conf regular attendee since 2019",
-  "Documentation writer | Tutorial creator | Mentor",
-  "Performance optimization specialist",
-  "Accessibility advocate | Inclusive design champion",
+  'Building the future with React Native 🚀',
+  'Mobile dev | Open source contributor | Coffee enthusiast ☕',
+  'Creating beautiful apps one component at a time',
+  'Expo advocate | Performance obsessed | Speaker',
+  'TypeScript purist | Animation lover | Bug hunter 🐛',
+  '10+ years in mobile | Now all-in on React Native',
+  'From native to cross-platform | No regrets ⚛️',
+  'Workshop instructor | Conference speaker | Code reviewer',
+  'Building apps for millions of users',
+  'Startup founder turned developer advocate',
+  'Making complex things simple since 2015',
+  'App.js Conf regular attendee since 2019',
+  'Documentation writer | Tutorial creator | Mentor',
+  'Performance optimization specialist',
+  'Accessibility advocate | Inclusive design champion',
 ];
 
 const captions = [
-  "Excited to announce App.js Conf 2026 in Kraków! Join the biggest React Native & Expo-focused conference. 27-29 May, see you there! 🚀 #AppJSConf #ReactNative #Expo #MobileDev #Kraków",
+  'Excited to announce App.js Conf 2026 in Kraków! Join the biggest React Native & Expo-focused conference. 27-29 May, see you there! 🚀 #AppJSConf #ReactNative #Expo #MobileDev #Kraków',
   "Just finished setting up the workshop materials for the Expo Modules API session. Can't wait to share this with everyone tomorrow! The native code integration has never been easier. #AppJS2026 #ExpoModules #Workshop",
-  "The Stara Zajezdnia venue looks absolutely stunning! Perfect atmosphere for three days of React Native talks and networking. Kraków never disappoints! #AppJSConf #Kraków #Conference",
-  "Day 1 workshop: Animations and Interactions updated for 2026! Learned so much about Reanimated, Gesture Handler, and WebGPU integration. Mind = blown 🤯 #AppJS #Animations #Reanimated",
-  "Performance workshop was incredible! Profiling tools, optimization techniques, and native-level debugging. My apps are about to get so much faster! #ReactNative #Performance #AppJS2026",
-  "Great discussions at the networking event! Met developers from Meta, Microsoft, Shopify, and Amazon. The React Native community is amazing! ☕️ #AppJSConf #Networking #Community",
-  "Universal apps with React Native - covering mobile and web platforms! Repository structure, routing, styling, animations, DOM components... this workshop had it all! #AppJS #UniversalApps",
-  "The Expo team just demoed some incredible new features. The future of React Native development is looking bright! ✨ #Expo #AppJS2026 #Innovation",
+  'The Stara Zajezdnia venue looks absolutely stunning! Perfect atmosphere for three days of React Native talks and networking. Kraków never disappoints! #AppJSConf #Kraków #Conference',
+  'Day 1 workshop: Animations and Interactions updated for 2026! Learned so much about Reanimated, Gesture Handler, and WebGPU integration. Mind = blown 🤯 #AppJS #Animations #Reanimated',
+  'Performance workshop was incredible! Profiling tools, optimization techniques, and native-level debugging. My apps are about to get so much faster! #ReactNative #Performance #AppJS2026',
+  'Great discussions at the networking event! Met developers from Meta, Microsoft, Shopify, and Amazon. The React Native community is amazing! ☕️ #AppJSConf #Networking #Community',
+  'Universal apps with React Native - covering mobile and web platforms! Repository structure, routing, styling, animations, DOM components... this workshop had it all! #AppJS #UniversalApps',
+  'The Expo team just demoed some incredible new features. The future of React Native development is looking bright! ✨ #Expo #AppJS2026 #Innovation',
   "Coffee break conversations hitting different at App.js. Just brainstormed a solution to a problem I've been stuck on for weeks! #DevLife #AppJSConf #Community",
-  "The afterparty was legendary! Great music, amazing people, and unforgettable memories. Thanks @software_mansion for organizing! 🎉 #AppJS2026 #Afterparty",
-  "Shipped a new feature using techniques learned at the workshop today. This is why conferences matter! Real knowledge, real impact. #ReactNative #AppJS #Learning",
-  "Kraków is beautiful! Took a morning walk through the old town before the conference started. Perfect way to start Day 2! 🏰 #Kraków #Poland #AppJSConf",
-  "Main stage talks are next level this year. Every speaker bringing their A-game with cutting-edge React Native insights! #AppJS2026 #Talks #ReactNative",
-  "Workshop on writing native code with Expo Modules API was exactly what I needed. Finally understand the bridging between JS and native! 🌉 #ExpoModules #NativeCode",
-  "98% of attendees would recommend App.js to a colleague - I can absolutely see why! This conference delivers every single year. 💯 #AppJSConf #Recommended",
-  "The sponsor booths are showing some amazing tools! CodeRabbit, CodeMagic, Infinite Red... so many great products for React Native developers. #AppJS #Sponsors",
+  'The afterparty was legendary! Great music, amazing people, and unforgettable memories. Thanks @software_mansion for organizing! 🎉 #AppJS2026 #Afterparty',
+  'Shipped a new feature using techniques learned at the workshop today. This is why conferences matter! Real knowledge, real impact. #ReactNative #AppJS #Learning',
+  'Kraków is beautiful! Took a morning walk through the old town before the conference started. Perfect way to start Day 2! 🏰 #Kraków #Poland #AppJSConf',
+  'Main stage talks are next level this year. Every speaker bringing their A-game with cutting-edge React Native insights! #AppJS2026 #Talks #ReactNative',
+  'Workshop on writing native code with Expo Modules API was exactly what I needed. Finally understand the bridging between JS and native! 🌉 #ExpoModules #NativeCode',
+  '98% of attendees would recommend App.js to a colleague - I can absolutely see why! This conference delivers every single year. 💯 #AppJSConf #Recommended',
+  'The sponsor booths are showing some amazing tools! CodeRabbit, CodeMagic, Infinite Red... so many great products for React Native developers. #AppJS #Sponsors',
   "Just asked the Reanimated team a question I've had for months. Getting answers directly from the creators is priceless! 🙌 #AppJSConf #Reanimated #Community",
-  "Three days of pure React Native immersion. My notes are overflowing and my mind is buzzing with new ideas! 📝 #AppJS2026 #Learning #ReactNative",
-  "The venue acoustics are perfect for the talks. Great job by the organizers making sure everyone can hear clearly! 🎤 #AppJSConf #Production",
-  "Met my open source hero today! The person who maintains a library I use daily. This is what makes conferences special. 🌟 #OpenSource #AppJS #Community",
+  'Three days of pure React Native immersion. My notes are overflowing and my mind is buzzing with new ideas! 📝 #AppJS2026 #Learning #ReactNative',
+  'The venue acoustics are perfect for the talks. Great job by the organizers making sure everyone can hear clearly! 🎤 #AppJSConf #Production',
+  'Met my open source hero today! The person who maintains a library I use daily. This is what makes conferences special. 🌟 #OpenSource #AppJS #Community',
 ];
 
 const shortCaptions = [
-  "🚀",
-  "💜",
-  "App.js 2026!",
-  "✨",
-  "Kraków vibes.",
-  "⚛️",
-  "Day 2!",
-  "Networking.",
-  "🎉",
-  "",
+  '🚀',
+  '💜',
+  'App.js 2026!',
+  '✨',
+  'Kraków vibes.',
+  '⚛️',
+  'Day 2!',
+  'Networking.',
+  '🎉',
+  '',
 ];
 
 const commentTexts = [
-  "Amazing talk! Learned so much! 🚀",
+  'Amazing talk! Learned so much! 🚀',
   "Can't wait for the workshop tomorrow!",
-  "Great insights on React Native performance!",
-  "This conference is incredible! 💜",
-  "Thanks for sharing this, super helpful!",
-  "Kraków is beautiful, loving the venue!",
-  "The Expo team killed it today!",
-  "Adding these techniques to my project ASAP",
+  'Great insights on React Native performance!',
+  'This conference is incredible! 💜',
+  'Thanks for sharing this, super helpful!',
+  'Kraków is beautiful, loving the venue!',
+  'The Expo team killed it today!',
+  'Adding these techniques to my project ASAP',
   "Best conference I've been to this year!",
-  "The community here is so welcoming!",
-  "Mind blown by the animations workshop 🤯",
-  "Can you share the slides from this talk?",
-  "Been using React Native for years, still learning new things!",
-  "The networking opportunities are amazing!",
-  "Software Mansion really knows how to organize events!",
-  "See you at the afterparty! 🎉",
-  "This is exactly what I needed for my project",
-  "The speakers this year are next level!",
+  'The community here is so welcoming!',
+  'Mind blown by the animations workshop 🤯',
+  'Can you share the slides from this talk?',
+  'Been using React Native for years, still learning new things!',
+  'The networking opportunities are amazing!',
+  'Software Mansion really knows how to organize events!',
+  'See you at the afterparty! 🎉',
+  'This is exactly what I needed for my project',
+  'The speakers this year are next level!',
   "Can't believe I finally met the Reanimated team!",
-  "App.js never disappoints! See you next year!",
+  'App.js never disappoints! See you next year!',
 ];
 
 const tagSets = [
   [
-    "AppJS",
-    "AppJSConf",
-    "AppJS2026",
-    "ReactNative",
-    "Expo",
-    "Conference",
-    "Kraków",
-    "MobileDev",
+    'AppJS',
+    'AppJSConf',
+    'AppJS2026',
+    'ReactNative',
+    'Expo',
+    'Conference',
+    'Kraków',
+    'MobileDev',
   ],
   [
-    "ReactNative",
-    "Expo",
-    "JavaScript",
-    "TypeScript",
-    "MobileApp",
-    "CrossPlatform",
-    "Dev",
-    "Code",
+    'ReactNative',
+    'Expo',
+    'JavaScript',
+    'TypeScript',
+    'MobileApp',
+    'CrossPlatform',
+    'Dev',
+    'Code',
   ],
   [
-    "Workshop",
-    "Learning",
-    "Coding",
-    "Animations",
-    "Reanimated",
-    "Performance",
-    "Tutorial",
-    "HandsOn",
+    'Workshop',
+    'Learning',
+    'Coding',
+    'Animations',
+    'Reanimated',
+    'Performance',
+    'Tutorial',
+    'HandsOn',
   ],
   [
-    "Networking",
-    "Community",
-    "DevLife",
-    "TechConf",
-    "Speakers",
-    "Talks",
-    "Inspiration",
-    "Connect",
+    'Networking',
+    'Community',
+    'DevLife',
+    'TechConf',
+    'Speakers',
+    'Talks',
+    'Inspiration',
+    'Connect',
   ],
   [
-    "Poland",
-    "Kraków",
-    "Europe",
-    "TechHub",
-    "Travel",
-    "Conference",
-    "Venue",
-    "StaraZajezdnia",
+    'Poland',
+    'Kraków',
+    'Europe',
+    'TechHub',
+    'Travel',
+    'Conference',
+    'Venue',
+    'StaraZajezdnia',
   ],
   [
-    "Expo",
-    "ExpoModules",
-    "NativeCode",
-    "iOS",
-    "Android",
-    "Build",
-    "Deploy",
-    "EAS",
+    'Expo',
+    'ExpoModules',
+    'NativeCode',
+    'iOS',
+    'Android',
+    'Build',
+    'Deploy',
+    'EAS',
   ],
   [
-    "Performance",
-    "Optimization",
-    "Profiling",
-    "Speed",
-    "Efficiency",
-    "BestPractices",
-    "Debug",
-    "Tools",
+    'Performance',
+    'Optimization',
+    'Profiling',
+    'Speed',
+    'Efficiency',
+    'BestPractices',
+    'Debug',
+    'Tools',
   ],
   [
-    "Animations",
-    "GestureHandler",
-    "Reanimated",
-    "UX",
-    "UI",
-    "Interactions",
-    "WebGPU",
-    "ThreeJS",
+    'Animations',
+    'GestureHandler',
+    'Reanimated',
+    'UX',
+    'UI',
+    'Interactions',
+    'WebGPU',
+    'ThreeJS',
   ],
   [
-    "OpenSource",
-    "GitHub",
-    "Contribute",
-    "Community",
-    "Library",
-    "Package",
-    "npm",
-    "Maintainers",
+    'OpenSource',
+    'GitHub',
+    'Contribute',
+    'Community',
+    'Library',
+    'Package',
+    'npm',
+    'Maintainers',
   ],
   [
-    "SoftwareMansion",
-    "Organizers",
-    "Sponsors",
-    "Partners",
-    "Meta",
-    "Microsoft",
-    "Shopify",
-    "Amazon",
+    'SoftwareMansion',
+    'Organizers',
+    'Sponsors',
+    'Partners',
+    'Meta',
+    'Microsoft',
+    'Shopify',
+    'Amazon',
   ],
 ];
 
 const timestamps = [
-  "1 minute ago",
-  "2 minutes ago",
-  "5 minutes ago",
-  "10 minutes ago",
-  "15 minutes ago",
-  "30 minutes ago",
-  "1 hour ago",
-  "2 hours ago",
-  "3 hours ago",
-  "4 hours ago",
-  "6 hours ago",
-  "8 hours ago",
-  "10 hours ago",
-  "12 hours ago",
-  "1 day ago",
-  "2 days ago",
-  "3 days ago",
-  "4 days ago",
-  "5 days ago",
-  "1 week ago",
+  '1 minute ago',
+  '2 minutes ago',
+  '5 minutes ago',
+  '10 minutes ago',
+  '15 minutes ago',
+  '30 minutes ago',
+  '1 hour ago',
+  '2 hours ago',
+  '3 hours ago',
+  '4 hours ago',
+  '6 hours ago',
+  '8 hours ago',
+  '10 hours ago',
+  '12 hours ago',
+  '1 day ago',
+  '2 days ago',
+  '3 days ago',
+  '4 days ago',
+  '5 days ago',
+  '1 week ago',
 ];
 
 function generateReplies(
@@ -576,22 +576,22 @@ function generateReplies(
   parentUsername: string,
 ): FeedComment[] {
   const replies: FeedComment[] = [];
-  const sentiments: ("positive" | "neutral" | "negative")[] = [
-    "positive",
-    "neutral",
-    "negative",
+  const sentiments: ('positive' | 'neutral' | 'negative')[] = [
+    'positive',
+    'neutral',
+    'negative',
   ];
   const languages = [
-    "en",
-    "pl",
-    "de",
-    "fr",
-    "es",
-    "pt",
-    "it",
-    "ja",
-    "ko",
-    "zh",
+    'en',
+    'pl',
+    'de',
+    'fr',
+    'es',
+    'pt',
+    'it',
+    'ja',
+    'ko',
+    'zh',
   ];
 
   for (let i = 0; i < count; i++) {
@@ -652,23 +652,23 @@ function generateCommentReactions(
   replyIndex: number,
 ): Reaction[] {
   const reactionTypes: (
-    | "like"
-    | "love"
-    | "laugh"
-    | "wow"
-    | "sad"
-    | "angry"
-    | "celebrate"
-    | "insightful"
+    | 'like'
+    | 'love'
+    | 'laugh'
+    | 'wow'
+    | 'sad'
+    | 'angry'
+    | 'celebrate'
+    | 'insightful'
   )[] = [
-    "like",
-    "love",
-    "laugh",
-    "wow",
-    "sad",
-    "angry",
-    "celebrate",
-    "insightful",
+    'like',
+    'love',
+    'laugh',
+    'wow',
+    'sad',
+    'angry',
+    'celebrate',
+    'insightful',
   ];
   const reactions: Reaction[] = [];
   const numReactions = 1 + ((postIndex + commentIndex + replyIndex) % 4);
@@ -699,22 +699,22 @@ function generateCommentReactions(
 
 function generateComments(postIndex: number, count: number): FeedComment[] {
   const comments: FeedComment[] = [];
-  const sentiments: ("positive" | "neutral" | "negative")[] = [
-    "positive",
-    "neutral",
-    "negative",
+  const sentiments: ('positive' | 'neutral' | 'negative')[] = [
+    'positive',
+    'neutral',
+    'negative',
   ];
   const languages = [
-    "en",
-    "pl",
-    "de",
-    "fr",
-    "es",
-    "pt",
-    "it",
-    "ja",
-    "ko",
-    "zh",
+    'en',
+    'pl',
+    'de',
+    'fr',
+    'es',
+    'pt',
+    'it',
+    'ja',
+    'ko',
+    'zh',
   ];
 
   for (let i = 0; i < count; i++) {
@@ -771,12 +771,12 @@ function generateSuggestedPosts(postIndex: number): SuggestedPost[] {
   const suggestions: SuggestedPost[] = [];
   const count = 8 + (postIndex % 6); // 8-13 suggestions per post
   const reasons = [
-    "Based on posts you liked",
-    "Popular in React Native",
-    "Followed by people you follow",
-    "Similar to posts you saved",
-    "Trending at App.js Conf",
-    "New from accounts you might like",
+    'Based on posts you liked',
+    'Popular in React Native',
+    'Followed by people you follow',
+    'Similar to posts you saved',
+    'Trending at App.js Conf',
+    'New from accounts you might like',
   ];
 
   for (let i = 0; i < count; i++) {
@@ -788,7 +788,7 @@ function generateSuggestedPosts(postIndex: number): SuggestedPost[] {
       avatar: `https://i.pravatar.cc/150?img=${(userIdx % 70) + 1}`,
       image: `https://picsum.photos/id/${picsumId}/1080/1080`,
       caption:
-        captions[(postIndex + i * 2) % captions.length].slice(0, 60) + "...",
+        captions[(postIndex + i * 2) % captions.length].slice(0, 60) + '...',
       likes: Math.floor(Math.random() * 5000),
       comments: Math.floor(Math.random() * 200),
       relevanceScore: 0.5 + Math.random() * 0.5,
@@ -802,52 +802,52 @@ function generateBadges(userIndex: number): UserBadge[] {
   const badges: UserBadge[] = [];
   const badgeTypes = [
     {
-      name: "Early Adopter",
-      icon: "🎖️",
-      rarity: "rare" as const,
-      description: "Joined in the first year",
+      name: 'Early Adopter',
+      icon: '🎖️',
+      rarity: 'rare' as const,
+      description: 'Joined in the first year',
     },
     {
-      name: "Speaker",
-      icon: "🎤",
-      rarity: "epic" as const,
-      description: "Presented at App.js Conf",
+      name: 'Speaker',
+      icon: '🎤',
+      rarity: 'epic' as const,
+      description: 'Presented at App.js Conf',
     },
     {
-      name: "Contributor",
-      icon: "🛠️",
-      rarity: "rare" as const,
-      description: "Contributed to open source",
+      name: 'Contributor',
+      icon: '🛠️',
+      rarity: 'rare' as const,
+      description: 'Contributed to open source',
     },
     {
-      name: "Top Commenter",
-      icon: "💬",
-      rarity: "common" as const,
-      description: "Active in discussions",
+      name: 'Top Commenter',
+      icon: '💬',
+      rarity: 'common' as const,
+      description: 'Active in discussions',
     },
     {
-      name: "Verified Pro",
-      icon: "✓",
-      rarity: "legendary" as const,
-      description: "Verified professional",
+      name: 'Verified Pro',
+      icon: '✓',
+      rarity: 'legendary' as const,
+      description: 'Verified professional',
     },
     {
-      name: "Workshop Lead",
-      icon: "📚",
-      rarity: "epic" as const,
-      description: "Led a workshop",
+      name: 'Workshop Lead',
+      icon: '📚',
+      rarity: 'epic' as const,
+      description: 'Led a workshop',
     },
     {
-      name: "Bug Hunter",
-      icon: "🐛",
-      rarity: "rare" as const,
-      description: "Found and reported bugs",
+      name: 'Bug Hunter',
+      icon: '🐛',
+      rarity: 'rare' as const,
+      description: 'Found and reported bugs',
     },
     {
-      name: "Community Hero",
-      icon: "🦸",
-      rarity: "legendary" as const,
-      description: "Outstanding community member",
+      name: 'Community Hero',
+      icon: '🦸',
+      rarity: 'legendary' as const,
+      description: 'Outstanding community member',
     },
   ];
 
@@ -858,7 +858,7 @@ function generateBadges(userIndex: number): UserBadge[] {
       id: `badge-${userIndex}-${i}`,
       name: badge.name,
       icon: badge.icon,
-      earnedAt: `${2020 + (userIndex % 6)}-${String((userIndex % 12) + 1).padStart(2, "0")}-${String((userIndex % 28) + 1).padStart(2, "0")}`,
+      earnedAt: `${2020 + (userIndex % 6)}-${String((userIndex % 12) + 1).padStart(2, '0')}-${String((userIndex % 28) + 1).padStart(2, '0')}`,
       description: badge.description,
       rarity: badge.rarity,
     });
@@ -877,7 +877,7 @@ function generateUserStats(userIndex: number): UserStats {
     avgLikes: 50 + ((userIndex * 11) % 2000),
     avgComments: 5 + ((userIndex * 3) % 100),
     totalViews: baseFollowers * multiplier * 10,
-    joinedDate: `${2018 + (userIndex % 8)}-${String((userIndex % 12) + 1).padStart(2, "0")}-01`,
+    joinedDate: `${2018 + (userIndex % 8)}-${String((userIndex % 12) + 1).padStart(2, '0')}-01`,
     lastActive: timestamps[userIndex % timestamps.length],
     verificationDate:
       userIndex % 3 === 0 ? `${2022 + (userIndex % 4)}-01-15` : undefined,
@@ -901,15 +901,15 @@ function generateMutualFollowers(
 
 function generateReactions(postIndex: number): Reaction[] {
   const reactionTypes: (
-    | "like"
-    | "love"
-    | "laugh"
-    | "wow"
-    | "sad"
-    | "angry"
-    | "celebrate"
-    | "insightful"
-  )[] = ["like", "love", "laugh", "wow", "celebrate", "insightful"];
+    | 'like'
+    | 'love'
+    | 'laugh'
+    | 'wow'
+    | 'sad'
+    | 'angry'
+    | 'celebrate'
+    | 'insightful'
+  )[] = ['like', 'love', 'laugh', 'wow', 'celebrate', 'insightful'];
   const reactions: Reaction[] = [];
   const numReactions = 2 + (postIndex % 5);
 
@@ -935,11 +935,11 @@ function generateReactions(postIndex: number): Reaction[] {
 
 function generateShares(postIndex: number): Share[] {
   const shares: Share[] = [];
-  const platforms: ("feed" | "story" | "dm" | "external")[] = [
-    "feed",
-    "story",
-    "dm",
-    "external",
+  const platforms: ('feed' | 'story' | 'dm' | 'external')[] = [
+    'feed',
+    'story',
+    'dm',
+    'external',
   ];
   const numShares = postIndex % 20;
 
@@ -951,7 +951,7 @@ function generateShares(postIndex: number): Share[] {
       avatar: `https://i.pravatar.cc/150?img=${(userIdx % 70) + 1}`,
       sharedAt: timestamps[(postIndex + i) % timestamps.length],
       platform: platforms[i % platforms.length],
-      message: i % 3 === 0 ? "Check this out!" : undefined,
+      message: i % 3 === 0 ? 'Check this out!' : undefined,
     });
   }
   return shares;
@@ -960,75 +960,75 @@ function generateShares(postIndex: number): Share[] {
 function generateLocationData(postIndex: number): LocationData {
   const locationsList = [
     {
-      name: "Stara Zajezdnia",
-      city: "Kraków",
-      country: "Poland",
+      name: 'Stara Zajezdnia',
+      city: 'Kraków',
+      country: 'Poland',
       lat: 50.0614,
       lng: 19.9366,
-      category: "Conference Venue",
+      category: 'Conference Venue',
     },
     {
-      name: "Software Mansion HQ",
-      city: "Kraków",
-      country: "Poland",
+      name: 'Software Mansion HQ',
+      city: 'Kraków',
+      country: 'Poland',
       lat: 50.0647,
       lng: 19.945,
-      category: "Tech Office",
+      category: 'Tech Office',
     },
     {
-      name: "Main Market Square",
-      city: "Kraków",
-      country: "Poland",
+      name: 'Main Market Square',
+      city: 'Kraków',
+      country: 'Poland',
       lat: 50.0619,
       lng: 19.9373,
-      category: "Landmark",
+      category: 'Landmark',
     },
     {
-      name: "Wawel Castle",
-      city: "Kraków",
-      country: "Poland",
+      name: 'Wawel Castle',
+      city: 'Kraków',
+      country: 'Poland',
       lat: 50.054,
       lng: 19.9352,
-      category: "Tourist Attraction",
+      category: 'Tourist Attraction',
     },
     {
-      name: "ICE Kraków",
-      city: "Kraków",
-      country: "Poland",
+      name: 'ICE Kraków',
+      city: 'Kraków',
+      country: 'Poland',
       lat: 50.0474,
       lng: 19.9267,
-      category: "Convention Center",
+      category: 'Convention Center',
     },
     {
-      name: "Kazimierz District",
-      city: "Kraków",
-      country: "Poland",
+      name: 'Kazimierz District',
+      city: 'Kraków',
+      country: 'Poland',
       lat: 50.0512,
       lng: 19.9452,
-      category: "Neighborhood",
+      category: 'Neighborhood',
     },
     {
-      name: "Galeria Krakowska",
-      city: "Kraków",
-      country: "Poland",
+      name: 'Galeria Krakowska',
+      city: 'Kraków',
+      country: 'Poland',
       lat: 50.0662,
       lng: 19.9451,
-      category: "Shopping Center",
+      category: 'Shopping Center',
     },
     {
-      name: "Planty Park",
-      city: "Kraków",
-      country: "Poland",
+      name: 'Planty Park',
+      city: 'Kraków',
+      country: 'Poland',
       lat: 50.0612,
       lng: 19.9415,
-      category: "Park",
+      category: 'Park',
     },
   ];
 
   const loc = locationsList[postIndex % locationsList.length];
   return {
     name: loc.name,
-    address: `ul. ${["Świętego", "Jana", "Floriańska", "Grodzka", "Szewska"][postIndex % 5]} ${postIndex % 100}`,
+    address: `ul. ${['Świętego', 'Jana', 'Floriańska', 'Grodzka', 'Szewska'][postIndex % 5]} ${postIndex % 100}`,
     city: loc.city,
     country: loc.country,
     coordinates: {
@@ -1037,7 +1037,7 @@ function generateLocationData(postIndex: number): LocationData {
       altitude: 200 + Math.random() * 50,
       accuracy: 5 + Math.random() * 10,
     },
-    placeId: `place-${postIndex}-${loc.name.toLowerCase().replace(/\s/g, "-")}`,
+    placeId: `place-${postIndex}-${loc.name.toLowerCase().replace(/\s/g, '-')}`,
     category: loc.category,
     rating: 4 + Math.random(),
     reviews: Math.floor(Math.random() * 1000) + 50,
@@ -1050,37 +1050,37 @@ function generateImageMetadata(
   postIndex: number,
   imageIndex: number,
 ): ImageMetadata {
-  const formats = ["jpeg", "jpg", "webp", "avif"];
+  const formats = ['jpeg', 'jpg', 'webp', 'avif'];
   const cameras = [
-    "iPhone 15 Pro",
-    "Sony A7 IV",
-    "Canon EOS R5",
-    "Pixel 8 Pro",
-    "Samsung S24 Ultra",
+    'iPhone 15 Pro',
+    'Sony A7 IV',
+    'Canon EOS R5',
+    'Pixel 8 Pro',
+    'Samsung S24 Ultra',
   ];
   const lenses = [
-    "24-70mm f/2.8",
-    "35mm f/1.4",
-    "50mm f/1.8",
-    "85mm f/1.2",
-    "16-35mm f/4",
+    '24-70mm f/2.8',
+    '35mm f/1.4',
+    '50mm f/1.8',
+    '85mm f/1.2',
+    '16-35mm f/4',
   ];
   const colors = [
-    "#1a1a2e",
-    "#16213e",
-    "#0f3460",
-    "#e94560",
-    "#533483",
-    "#2c3e50",
-    "#34495e",
-    "#2980b9",
+    '#1a1a2e',
+    '#16213e',
+    '#0f3460',
+    '#e94560',
+    '#533483',
+    '#2c3e50',
+    '#34495e',
+    '#2980b9',
   ];
   const blurhashes = [
-    "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
-    "LGF5?xYk^6#M@-5c,1J5@[or[Q6.",
-    "L6PZfSi_.AyE_3t7t7R**0o#DgR4",
-    "LKO2:N%2Tw=w]~RBVZRi};RPxuwH",
-    "LFFY^V%gI:oL.ToLxuae-pRkWVay",
+    'LEHV6nWB2yk8pyo0adR*.7kCMdnj',
+    'LGF5?xYk^6#M@-5c,1J5@[or[Q6.',
+    'L6PZfSi_.AyE_3t7t7R**0o#DgR4',
+    'LKO2:N%2Tw=w]~RBVZRi};RPxuwH',
+    'LFFY^V%gI:oL.ToLxuae-pRkWVay',
   ];
 
   return {
@@ -1097,7 +1097,7 @@ function generateImageMetadata(
       shutterSpeed: `1/${60 + (postIndex % 500)}`,
       iso: 100 + (postIndex % 32) * 100,
       focalLength: `${24 + (imageIndex % 60)}mm`,
-      takenAt: `2026-05-${String(27 + (postIndex % 3)).padStart(2, "0")}T${String(8 + (postIndex % 12)).padStart(2, "0")}:${String(postIndex % 60).padStart(2, "0")}:00Z`,
+      takenAt: `2026-05-${String(27 + (postIndex % 3)).padStart(2, '0')}T${String(8 + (postIndex % 12)).padStart(2, '0')}:${String(postIndex % 60).padStart(2, '0')}:00Z`,
     },
     altText: `Tech conference photo ${postIndex + 1}-${imageIndex + 1}: developers at App.js Conf 2026`,
     faces:
@@ -1134,28 +1134,28 @@ function generateAnalytics(_postIndex: number, likes: number): PostAnalytics {
       count: Math.floor((views / 24) * (0.5 + Math.random())),
     })),
     viewsByCountry: [
-      { country: "Poland", count: Math.floor(views * 0.3) },
-      { country: "United States", count: Math.floor(views * 0.2) },
-      { country: "Germany", count: Math.floor(views * 0.1) },
-      { country: "United Kingdom", count: Math.floor(views * 0.08) },
-      { country: "France", count: Math.floor(views * 0.05) },
-      { country: "Netherlands", count: Math.floor(views * 0.04) },
-      { country: "Spain", count: Math.floor(views * 0.03) },
-      { country: "Brazil", count: Math.floor(views * 0.03) },
-      { country: "Canada", count: Math.floor(views * 0.02) },
-      { country: "Other", count: Math.floor(views * 0.15) },
+      { country: 'Poland', count: Math.floor(views * 0.3) },
+      { country: 'United States', count: Math.floor(views * 0.2) },
+      { country: 'Germany', count: Math.floor(views * 0.1) },
+      { country: 'United Kingdom', count: Math.floor(views * 0.08) },
+      { country: 'France', count: Math.floor(views * 0.05) },
+      { country: 'Netherlands', count: Math.floor(views * 0.04) },
+      { country: 'Spain', count: Math.floor(views * 0.03) },
+      { country: 'Brazil', count: Math.floor(views * 0.03) },
+      { country: 'Canada', count: Math.floor(views * 0.02) },
+      { country: 'Other', count: Math.floor(views * 0.15) },
     ],
     viewsByAge: [
-      { range: "18-24", count: Math.floor(views * 0.25) },
-      { range: "25-34", count: Math.floor(views * 0.45) },
-      { range: "35-44", count: Math.floor(views * 0.2) },
-      { range: "45-54", count: Math.floor(views * 0.07) },
-      { range: "55+", count: Math.floor(views * 0.03) },
+      { range: '18-24', count: Math.floor(views * 0.25) },
+      { range: '25-34', count: Math.floor(views * 0.45) },
+      { range: '35-44', count: Math.floor(views * 0.2) },
+      { range: '45-54', count: Math.floor(views * 0.07) },
+      { range: '55+', count: Math.floor(views * 0.03) },
     ],
     viewsByGender: [
-      { gender: "Male", count: Math.floor(views * 0.75) },
-      { gender: "Female", count: Math.floor(views * 0.22) },
-      { gender: "Other", count: Math.floor(views * 0.03) },
+      { gender: 'Male', count: Math.floor(views * 0.75) },
+      { gender: 'Female', count: Math.floor(views * 0.22) },
+      { gender: 'Other', count: Math.floor(views * 0.03) },
     ],
   };
 }
@@ -1214,8 +1214,8 @@ function generateChartSeries(
   seed: number,
   likes: number,
   shares: number,
-): FeedPost["chartData"] {
-  const result: FeedPost["chartData"] = { likes: {}, comments: {}, shares: {} };
+): FeedPost['chartData'] {
+  const result: FeedPost['chartData'] = { likes: {}, comments: {}, shares: {} };
 
   for (const days of CHART_DAYS) {
     const rand = seededRandom(seed * 1000 + days);
@@ -1267,9 +1267,9 @@ function picsumUrl(id: number, aspectRatio: number, thumbnail = false): string {
 
 function generateMockFeed(count: number): FeedPost[] {
   const posts: FeedPost[] = [];
-  const languages = ["en", "pl", "de", "fr", "es"];
-  const visibilities: ("public" | "followers" | "close_friends" | "private")[] =
-    ["public", "public", "public", "followers", "close_friends"];
+  const languages = ['en', 'pl', 'de', 'fr', 'es'];
+  const visibilities: ('public' | 'followers' | 'close_friends' | 'private')[] =
+    ['public', 'public', 'public', 'followers', 'close_friends'];
 
   for (let i = 0; i < count; i++) {
     const userIndex = i % usernames.length;
@@ -1370,13 +1370,13 @@ function generateMockFeed(count: number): FeedPost[] {
       showSuggestions,
       reactions: generateReactions(i),
       shares: generateShares(i),
-      mentions: caption.includes("@")
+      mentions: caption.includes('@')
         ? [
             {
               username: usernames[(userIndex + 1) % usernames.length],
               position: {
-                start: caption.indexOf("@"),
-                end: caption.indexOf("@") + 15,
+                start: caption.indexOf('@'),
+                end: caption.indexOf('@') + 15,
               },
               userId: `user-${(userIndex + 1) % usernames.length}`,
             },
@@ -1389,10 +1389,10 @@ function generateMockFeed(count: number): FeedPost[] {
             url: `https://appjs.co/2026/talk-${i}`,
             title: `App.js Conf 2026 - Talk ${i}`,
             description:
-              "Join us for the biggest React Native & Expo conference in Europe!",
+              'Join us for the biggest React Native & Expo conference in Europe!',
             image: `https://picsum.photos/id/${(i * 3) % 1000}/400/210`,
-            siteName: "App.js Conf",
-            favicon: "https://appjs.co/favicon.ico",
+            siteName: 'App.js Conf',
+            favicon: 'https://appjs.co/favicon.ico',
           }
         : undefined,
       poll: hasPoll
@@ -1400,41 +1400,41 @@ function generateMockFeed(count: number): FeedPost[] {
             id: `poll-${i}`,
             question: [
               "What's your favorite React Native feature?",
-              "Best workshop topic?",
-              "Favorite Expo feature?",
+              'Best workshop topic?',
+              'Favorite Expo feature?',
             ][i % 3],
             options: [
               {
                 id: `opt-${i}-1`,
-                text: "Reanimated",
+                text: 'Reanimated',
                 votes: Math.floor(Math.random() * 200),
                 voters: [],
                 percentage: 0,
               },
               {
                 id: `opt-${i}-2`,
-                text: "Expo Router",
+                text: 'Expo Router',
                 votes: Math.floor(Math.random() * 200),
                 voters: [],
                 percentage: 0,
               },
               {
                 id: `opt-${i}-3`,
-                text: "Gesture Handler",
+                text: 'Gesture Handler',
                 votes: Math.floor(Math.random() * 200),
                 voters: [],
                 percentage: 0,
               },
               {
                 id: `opt-${i}-4`,
-                text: "EAS Build",
+                text: 'EAS Build',
                 votes: Math.floor(Math.random() * 200),
                 voters: [],
                 percentage: 0,
               },
             ],
             totalVotes: Math.floor(Math.random() * 800),
-            endsAt: "2026-05-30T23:59:59Z",
+            endsAt: '2026-05-30T23:59:59Z',
             isAnonymous: i % 2 === 0,
             allowMultiple: i % 4 === 0,
           }
@@ -1443,16 +1443,16 @@ function generateMockFeed(count: number): FeedPost[] {
       sponsorInfo: isSponsored
         ? {
             advertiser: [
-              "Expo",
-              "Software Mansion",
-              "Meta",
-              "Shopify",
-              "Microsoft",
+              'Expo',
+              'Software Mansion',
+              'Meta',
+              'Shopify',
+              'Microsoft',
             ][i % 5],
             targetAudience: [
-              "React Native developers",
-              "Mobile developers",
-              "Frontend engineers",
+              'React Native developers',
+              'Mobile developers',
+              'Frontend engineers',
             ],
             budget: 1000 + (i % 10) * 500,
             impressionsGoal: 10000 + (i % 10) * 5000,
@@ -1464,21 +1464,21 @@ function generateMockFeed(count: number): FeedPost[] {
           ? [
               {
                 editedAt: timestamps[(i + 2) % timestamps.length],
-                previousCaption: caption.slice(0, 50) + "... (edited)",
+                previousCaption: caption.slice(0, 50) + '... (edited)',
               },
             ]
           : undefined,
       visibility: visibilities[i % visibilities.length],
       allowComments: i % 15 !== 0,
       allowShares: i % 20 !== 0,
-      contentWarning: i % 50 === 0 ? "Flashing lights in video" : undefined,
+      contentWarning: i % 50 === 0 ? 'Flashing lights in video' : undefined,
       language: languages[i % languages.length],
       translations:
         i % 5 === 0
           ? {
-              pl: "Polskie tłumaczenie posta...",
-              de: "Deutsche Übersetzung des Beitrags...",
-              fr: "Traduction française du post...",
+              pl: 'Polskie tłumaczenie posta...',
+              de: 'Deutsche Übersetzung des Beitrags...',
+              fr: 'Traduction française du post...',
             }
           : undefined,
       audioTrack:
@@ -1486,18 +1486,18 @@ function generateMockFeed(count: number): FeedPost[] {
           ? {
               id: `track-${i}`,
               title: [
-                "Coding Vibes",
-                "Dev Flow",
-                "Binary Beat",
-                "React Rhythm",
-                "Async Dreams",
+                'Coding Vibes',
+                'Dev Flow',
+                'Binary Beat',
+                'React Rhythm',
+                'Async Dreams',
               ][i % 5],
               artist: [
-                "CodeWave",
-                "DevTunes",
-                "ByteBeats",
-                "SyntaxSound",
-                "LoopLogic",
+                'CodeWave',
+                'DevTunes',
+                'ByteBeats',
+                'SyntaxSound',
+                'LoopLogic',
               ][i % 5],
               duration: 180 + (i % 120),
               coverArt: `https://picsum.photos/id/${(i * 7) % 1000}/300/300`,
@@ -1513,11 +1513,11 @@ function generateMockFeed(count: number): FeedPost[] {
 export const MOCK_FEED = generateMockFeed(5000);
 
 const HEAVY_COMMENTS_BY_POST_ID: Record<string, () => FeedComment[]> = {
-  "1": () => generateComments(0, 15),
-  "2": () => generateComments(1, 20),
-  "3": () => generateComments(2, 25),
-  "4": () => generateComments(3, 30),
-  "5": () => generateComments(4, 35),
+  '1': () => generateComments(0, 15),
+  '2': () => generateComments(1, 20),
+  '3': () => generateComments(2, 25),
+  '4': () => generateComments(3, 30),
+  '5': () => generateComments(4, 35),
 };
 
 export const findPostForDetails = (id: string): FeedPost | undefined => {
@@ -1529,7 +1529,7 @@ export const findPostForDetails = (id: string): FeedPost | undefined => {
 
 export interface FeedPostSlim {
   id: string;
-  type: "post";
+  type: 'post';
   user: {
     username: string;
     avatar: string;
@@ -1550,7 +1550,7 @@ export interface FeedPostSlim {
 
 export interface SuggestionsItem {
   id: string;
-  type: "suggestions";
+  type: 'suggestions';
   posts: SuggestedPost[];
 }
 
@@ -1561,7 +1561,7 @@ export const toSlimFeed = (posts: FeedPost[]): FeedListItem[] => {
   for (const post of posts) {
     result.push({
       id: post.id,
-      type: "post",
+      type: 'post',
       user: {
         username: post.user.username,
         avatar: post.user.avatar,
@@ -1582,7 +1582,7 @@ export const toSlimFeed = (posts: FeedPost[]): FeedListItem[] => {
     if (post.showSuggestions && post.suggestedPosts.length > 0) {
       result.push({
         id: `suggestions-${post.id}`,
-        type: "suggestions",
+        type: 'suggestions',
         posts: post.suggestedPosts,
       });
     }

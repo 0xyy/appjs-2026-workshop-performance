@@ -1,15 +1,11 @@
-import { useContext } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { useRouter } from "expo-router";
+import { useContext } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
 
-import { ColorsContext } from "@/context/colors-context";
-import { formatTags } from "@/utils/feed-utils";
+import { ColorsContext } from '@/context/colors-context';
+import { formatTags } from '@/utils/feed-utils';
 
-export const TagList = ({
-  tags,
-}: {
-  tags: string[];
-}) => {
+export const TagList = ({ tags }: { tags: string[] }) => {
   const colors = useContext(ColorsContext);
   const router = useRouter();
 
@@ -18,7 +14,7 @@ export const TagList = ({
   if (formattedTags.length === 0) return null;
 
   const openHashtag = (tag: string) => {
-    const cleanTag = tag.replace("#", "");
+    const cleanTag = tag.replace('#', '');
     router.push(`/hashtag/${encodeURIComponent(cleanTag)}`);
   };
 
@@ -35,8 +31,8 @@ export const TagList = ({
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     paddingHorizontal: 12,
     paddingTop: 4,
     gap: 4,

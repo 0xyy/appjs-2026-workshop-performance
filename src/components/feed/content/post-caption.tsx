@@ -1,7 +1,7 @@
-import { useContext } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { useContext } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
-import { ColorsContext } from "@/context/colors-context";
+import { ColorsContext } from '@/context/colors-context';
 
 export const PostCaption = ({
   username,
@@ -16,8 +16,12 @@ export const PostCaption = ({
 
   return (
     <View style={styles.wrapper}>
-      <View style={[styles.card, { backgroundColor: colors.cardBackgroundAlt }]}>
-        <View style={[styles.accentBar, { backgroundColor: colors.tint + "30" }]} />
+      <View
+        style={[styles.card, { backgroundColor: colors.cardBackgroundAlt }]}
+      >
+        <View
+          style={[styles.accentBar, { backgroundColor: colors.tint + '30' }]}
+        />
         <Text style={[styles.text, { color: colors.text }]}>
           <Text style={styles.username}>{username}</Text> {caption}
         </Text>
@@ -33,18 +37,18 @@ const styles = StyleSheet.create({
   },
   card: {
     borderRadius: 10,
-    overflow: "hidden",
+    overflow: 'hidden',
     padding: 8,
   },
   accentBar: {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     left: 0,
     width: 3,
-    height: "100%",
+    height: '100%',
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   text: {
     fontSize: 14,
@@ -52,6 +56,6 @@ const styles = StyleSheet.create({
     paddingLeft: 4,
   },
   username: {
-    fontWeight: "600",
+    fontWeight: '600',
   },
 });

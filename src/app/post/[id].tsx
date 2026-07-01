@@ -1,5 +1,5 @@
-import { useLocalSearchParams, useRouter } from "expo-router";
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import {
   View,
   Text,
@@ -9,21 +9,21 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
-} from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+} from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { PostDetailHeader } from "@/components/feed/post-detail-header";
-import { IconSymbol } from "@/components/ui/icon-symbol";
-import { Colors } from "@/constants/theme";
-import { ColorsContext } from "@/context/colors-context";
-import { findPostForDetails, FeedPost, FeedComment } from "@/data/mock-feed";
-import { useColorScheme } from "@/hooks/use-color-scheme";
-import { buildMentionSuggestions } from "@/utils/mention-utils";
-import { detectSpam } from "@/utils/spam-detection";
+import { PostDetailHeader } from '@/components/feed/post-detail-header';
+import { IconSymbol } from '@/components/ui/icon-symbol';
+import { Colors } from '@/constants/theme';
+import { ColorsContext } from '@/context/colors-context';
+import { findPostForDetails, FeedPost, FeedComment } from '@/data/mock-feed';
+import { useColorScheme } from '@/hooks/use-color-scheme';
+import { buildMentionSuggestions } from '@/utils/mention-utils';
+import { detectSpam } from '@/utils/spam-detection';
 
-import { CommentInput } from "@/components/feed/comment-input";
-import { CommentItem } from "@/components/feed/comments/comment-item";
-import { findRelatedPosts } from "@/utils/related-posts";
+import { CommentInput } from '@/components/feed/comment-input';
+import { CommentItem } from '@/components/feed/comments/comment-item';
+import { findRelatedPosts } from '@/utils/related-posts';
 
 interface ReplyInfo {
   commentId: string;
@@ -40,11 +40,11 @@ const PostDetailScreen = () => {
   const [isLiked, setIsLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
   const [comments, setComments] = useState<FeedComment[]>([]);
-  const [newComment, setNewComment] = useState("");
+  const [newComment, setNewComment] = useState('');
   const [replyInfo, setReplyInfo] = useState<ReplyInfo | null>(null);
   const [shareCount, setShareCount] = useState(0);
   const colorScheme = useColorScheme();
-  const colors = Colors[colorScheme ?? "light"];
+  const colors = Colors[colorScheme ?? 'light'];
 
   useEffect(() => {
     const foundPost = findPostForDetails(id);
@@ -71,7 +71,7 @@ const PostDetailScreen = () => {
     if (!newComment.trim() || !post) return;
 
     const commentText = replyInfo
-      ? newComment.replace(`@${replyInfo.username} `, "")
+      ? newComment.replace(`@${replyInfo.username} `, '')
       : newComment;
 
     // Run spam detection — blocks the JS thread
@@ -88,11 +88,11 @@ const PostDetailScreen = () => {
 
     const newCommentObj: FeedComment = {
       id: `new-comment-${Date.now()}`,
-      username: "you",
-      avatar: "https://i.pravatar.cc/150?img=68",
+      username: 'you',
+      avatar: 'https://i.pravatar.cc/150?img=68',
       text: commentText.trim(),
       likes: 0,
-      timestamp: "Just now",
+      timestamp: 'Just now',
       replyingTo: replyInfo?.username,
       mentions: mentionSuggestions.slice(0, 5).map((s, i) => ({
         username: s.username,
@@ -119,13 +119,13 @@ const PostDetailScreen = () => {
       setComments((prev) => [newCommentObj, ...prev]);
     }
 
-    setNewComment("");
+    setNewComment('');
     setReplyInfo(null);
   }, [newComment, post, replyInfo, comments]);
 
   const cancelReply = useCallback(() => {
     setReplyInfo(null);
-    setNewComment("");
+    setNewComment('');
   }, []);
 
   const handleLike = useCallback(() => {
@@ -145,8 +145,8 @@ const PostDetailScreen = () => {
           style={{
             flex: 1,
             backgroundColor: colors.cardBackground,
-            justifyContent: "center",
-            alignItems: "center",
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
           <Text style={{ color: colors.text }}>Post not found</Text>
@@ -159,14 +159,14 @@ const PostDetailScreen = () => {
     <ColorsContext.Provider value={colors}>
       <KeyboardAvoidingView
         style={{ flex: 1, backgroundColor: colors.cardBackground }}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={90}
       >
         {/* Header */}
         <View
           style={{
-            flexDirection: "row",
-            alignItems: "center",
+            flexDirection: 'row',
+            alignItems: 'center',
             paddingHorizontal: 16,
             paddingBottom: 10,
             paddingTop: insets.top,
@@ -184,7 +184,7 @@ const PostDetailScreen = () => {
           <Text
             style={{
               fontSize: 16,
-              fontWeight: "600",
+              fontWeight: '600',
               color: colors.text,
               flex: 1,
             }}
@@ -224,7 +224,7 @@ const PostDetailScreen = () => {
           keyExtractor={(item) => item.id}
           contentContainerStyle={{ paddingBottom: 20 }}
           ListEmptyComponent={
-            <View style={{ padding: 20, alignItems: "center" }}>
+            <View style={{ padding: 20, alignItems: 'center' }}>
               <Text style={{ color: colors.icon, fontSize: 14 }}>
                 No comments yet. Be the first to comment!
               </Text>
@@ -236,13 +236,13 @@ const PostDetailScreen = () => {
                 style={{
                   paddingTop: 16,
                   borderTopWidth: 0.5,
-                  borderTopColor: colors.icon + "30",
+                  borderTopColor: colors.icon + '30',
                 }}
               >
                 <Text
                   style={{
                     fontSize: 14,
-                    fontWeight: "600",
+                    fontWeight: '600',
                     color: colors.text,
                     paddingHorizontal: 12,
                     paddingBottom: 12,
@@ -273,7 +273,7 @@ const PostDetailScreen = () => {
                         numberOfLines={1}
                         style={{
                           fontSize: 12,
-                          fontWeight: "600",
+                          fontWeight: '600',
                           color: colors.text,
                           marginTop: 6,
                         }}
@@ -288,7 +288,7 @@ const PostDetailScreen = () => {
                           marginTop: 2,
                         }}
                       >
-                        {item.reasons.slice(0, 2).join(" · ")}
+                        {item.reasons.slice(0, 2).join(' · ')}
                       </Text>
                     </TouchableOpacity>
                   )}
@@ -302,19 +302,19 @@ const PostDetailScreen = () => {
         {replyInfo && (
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
               paddingHorizontal: 16,
               paddingVertical: 8,
-              backgroundColor: colors.icon + "15",
+              backgroundColor: colors.icon + '15',
               borderTopWidth: 0.5,
-              borderTopColor: colors.icon + "30",
+              borderTopColor: colors.icon + '30',
             }}
           >
             <Text style={{ fontSize: 13, color: colors.icon }}>
-              Replying to{" "}
-              <Text style={{ color: colors.text, fontWeight: "600" }}>
+              Replying to{' '}
+              <Text style={{ color: colors.text, fontWeight: '600' }}>
                 @{replyInfo.username}
               </Text>
             </Text>
@@ -333,7 +333,7 @@ const PostDetailScreen = () => {
           placeholder={
             replyInfo
               ? `Reply to @${replyInfo.username}...`
-              : "Add a comment..."
+              : 'Add a comment...'
           }
           colors={colors}
           comments={comments}

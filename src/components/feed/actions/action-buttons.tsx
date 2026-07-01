@@ -1,19 +1,19 @@
-import { useContext } from "react";
-import { View, TouchableOpacity, Share, StyleSheet } from "react-native";
-import { useRouter } from "expo-router";
+import { useContext } from 'react';
+import { View, TouchableOpacity, Share, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
 
-import { ColorsContext } from "@/context/colors-context";
-import { HeartIcon } from "@/components/feed/icons/heart-icon";
-import { CommentIcon } from "@/components/feed/icons/comment-icon";
-import { ShareIcon } from "@/components/feed/icons/share-icon";
-import { LikesCount } from "@/components/feed/content/likes-count";
+import { ColorsContext } from '@/context/colors-context';
+import { HeartIcon } from '@/components/feed/icons/heart-icon';
+import { CommentIcon } from '@/components/feed/icons/comment-icon';
+import { ShareIcon } from '@/components/feed/icons/share-icon';
+import { LikesCount } from '@/components/feed/content/likes-count';
 
 export const ActionButtons = ({
   postId,
   username,
   likes,
   isLiked,
-  onLike
+  onLike,
 }: {
   postId: string;
   username: string;
@@ -25,11 +25,11 @@ export const ActionButtons = ({
   const router = useRouter();
 
   const likesText = (() => {
-    let text = "";
+    let text = '';
     for (let i = 0; i < 100; i++) {
       text = likes.toLocaleString();
     }
-    return text + " likes";
+    return text + ' likes';
   })();
 
   const handleLike = () => {
@@ -44,7 +44,7 @@ export const ActionButtons = ({
     try {
       await Share.share({
         message: `Check out this post by @${username}: https://example.com/post/${postId}`,
-        url: `https://example.com/post/${postId}`
+        url: `https://example.com/post/${postId}`,
       });
     } catch {
       // User cancelled
@@ -60,7 +60,11 @@ export const ActionButtons = ({
       <View style={styles.container}>
         <View style={styles.leftButtons}>
           <TouchableOpacity onPress={handleLike} style={styles.iconButton}>
-            <HeartIcon size={26} color={isLiked ? "#FF6B6B" : colors.text} filled={isLiked} />
+            <HeartIcon
+              size={26}
+              color={isLiked ? '#FF6B6B' : colors.text}
+              filled={isLiked}
+            />
           </TouchableOpacity>
           <TouchableOpacity style={styles.iconButton} onPress={handleComment}>
             <CommentIcon size={24} color={colors.text} />
@@ -78,18 +82,18 @@ export const ActionButtons = ({
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: 12,
-    paddingBottom: 8
+    paddingBottom: 8,
   },
   leftButtons: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 14
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 14,
   },
   iconButton: {
-    padding: 2
-  }
+    padding: 2,
+  },
 });

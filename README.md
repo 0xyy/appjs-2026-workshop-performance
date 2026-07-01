@@ -50,9 +50,10 @@ The link is read-only - you can view every task without an account. If you have 
 - [Native performance and memory profiling](<slides/AppJS - Native perf and memory (shareable).pptx>) (with notes per slide)
 
 ## Exercise checkpoints
+
 - React re-renders and DevTools
-    - `react-and-devtools-X.X` 
+  - `react-and-devtools-X.X`
 - List performance
-    - `list-performance-XX`
+  - `list-performance-XX`
 - Native performance and memory profiling
-    - `native-performance-XX` 
+  - `native-performance-XX`
