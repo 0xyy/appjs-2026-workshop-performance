@@ -11,6 +11,7 @@ import { useRouter } from 'expo-router';
 import { ColorsContext } from '@/context/colors-context';
 import { VerifiedIcon } from '@/components/feed/icons/verified-icon';
 import { ImageWithShimmer } from '@/components/feed/shimmer/image-with-shimmer';
+import { sizedPravatarUrl } from '@/utils/image-url';
 import { PostOptionsMenu } from './post-options-menu';
 
 export const PostHeader = ({
@@ -53,7 +54,10 @@ export const PostHeader = ({
           onPress={() => router.push(`/profile/${username}`)}
         >
           <View style={styles.avatarClip}>
-            <ImageWithShimmer source={{ uri: avatar }} style={styles.avatar} />
+            <ImageWithShimmer
+              source={{ uri: sizedPravatarUrl(avatar, styles.avatar.width) }}
+              style={styles.avatar}
+            />
             <View style={styles.avatarOverlay} />
           </View>
 

@@ -4,6 +4,7 @@ import { useRouter } from 'expo-router';
 
 import { ColorsContext } from '@/context/colors-context';
 import { ImageWithShimmer } from '@/components/feed/shimmer/image-with-shimmer';
+import { sizedPicsumUrl, sizedPravatarUrl } from '@/utils/image-url';
 import { SuggestedPost } from '@/data/mock-feed';
 
 export const SuggestedPostCard = ({ post }: { post: SuggestedPost }) => {
@@ -28,15 +29,21 @@ export const SuggestedPostCard = ({ post }: { post: SuggestedPost }) => {
     >
       <TouchableOpacity onPress={openPost}>
         <ImageWithShimmer
-          source={{ uri: post.image }}
+          source={{
+            uri: sizedPicsumUrl(
+              post.image,
+              styles.image.width,
+              styles.image.height,
+            ),
+          }}
           style={styles.image}
-          resizeMode="cover"
+          contentFit="cover"
         />
       </TouchableOpacity>
       <View style={styles.info}>
         <TouchableOpacity onPress={openProfile} style={styles.userRow}>
           <ImageWithShimmer
-            source={{ uri: post.avatar }}
+            source={{ uri: sizedPravatarUrl(post.avatar, styles.avatar.width) }}
             style={styles.avatar}
           />
           <Text

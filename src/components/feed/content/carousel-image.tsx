@@ -2,13 +2,20 @@ import { View, StyleSheet } from 'react-native';
 
 import { FeedImage } from '@/data/mock-feed';
 import { ImageWithShimmer } from '@/components/feed/shimmer/image-with-shimmer';
+import { sizedPicsumUrl } from '@/utils/image-url';
 
 const IMAGE_WIDTH = 400;
 
 export const CarouselImage = ({ image }: { image: FeedImage }) => (
   <View>
     <ImageWithShimmer
-      source={{ uri: image.uri }}
+      source={{
+        uri: sizedPicsumUrl(
+          image.uri,
+          IMAGE_WIDTH,
+          IMAGE_WIDTH / image.aspectRatio,
+        ),
+      }}
       style={{ width: IMAGE_WIDTH, aspectRatio: image.aspectRatio }}
     />
     <View style={styles.vignetteTop} />
