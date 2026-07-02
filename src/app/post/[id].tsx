@@ -4,7 +4,7 @@ import {
   useEffect,
   useCallback,
   useRef,
-  useTransition,
+  useDeferredValue,
 } from 'react';
 import {
   View,
@@ -43,11 +43,9 @@ const PostDetailScreen = () => {
   const inputRef = useRef<TextInput>(null);
   const prevCommentsLengthRef = useRef(0);
   const [post, setPost] = useState<FeedPost | null>(null);
-  const [footerPost, setFooterPost] = useState<FeedPost | null>(null);
   const [comments, setComments] = useState<FeedComment[]>([]);
   const [newComment, setNewComment] = useState('');
   const [replyInfo, setReplyInfo] = useState<ReplyInfo | null>(null);
-  const [, startTransition] = useTransition();
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
 
@@ -56,14 +54,15 @@ const PostDetailScreen = () => {
     if (foundPost) {
       setPost(foundPost);
       setComments(foundPost.comments);
-      startTransition(() => setFooterPost(foundPost));
     }
   }, [id]);
+
+  const deferredPost = useDeferredValue(post);
 
   const hasNewComments = comments.length > prevCommentsLengthRef.current;
   prevCommentsLengthRef.current = comments.length;
 
-  const relatedPosts = footerPost ? findRelatedPosts(footerPost) : [];
+  const relatedPosts = deferredPost ? findRelatedPosts(deferredPost) : [];
 
   const handleReply = useCallback((commentId: string, username: string) => {
     setReplyInfo({ commentId, username });
