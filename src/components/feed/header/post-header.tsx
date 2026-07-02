@@ -7,11 +7,12 @@ import {
   StyleSheet,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { Image } from 'expo-image';
 
 import { ColorsContext } from '@/context/colors-context';
 import { VerifiedIcon } from '@/components/feed/icons/verified-icon';
-import { ImageWithShimmer } from '@/components/feed/shimmer/image-with-shimmer';
 import { sizedPravatarUrl } from '@/utils/image-url';
+import { DEFAULT_BLURHASH } from '@/constants/blurhash';
 import { PostOptionsMenu } from './post-options-menu';
 
 export const PostHeader = ({
@@ -54,8 +55,10 @@ export const PostHeader = ({
           onPress={() => router.push(`/profile/${username}`)}
         >
           <View style={styles.avatarClip}>
-            <ImageWithShimmer
+            <Image
               source={{ uri: sizedPravatarUrl(avatar, styles.avatar.width) }}
+              placeholder={{ blurhash: DEFAULT_BLURHASH }}
+              transition={200}
               style={styles.avatar}
             />
             <View style={styles.avatarOverlay} />

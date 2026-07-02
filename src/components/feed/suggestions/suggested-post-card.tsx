@@ -1,10 +1,11 @@
 import { useState, useContext } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
+import { Image } from 'expo-image';
 
 import { ColorsContext } from '@/context/colors-context';
-import { ImageWithShimmer } from '@/components/feed/shimmer/image-with-shimmer';
 import { sizedPicsumUrl, sizedPravatarUrl } from '@/utils/image-url';
+import { DEFAULT_BLURHASH } from '@/constants/blurhash';
 import { SuggestedPost } from '@/data/mock-feed';
 
 export const SuggestedPostCard = ({ post }: { post: SuggestedPost }) => {
@@ -28,7 +29,7 @@ export const SuggestedPostCard = ({ post }: { post: SuggestedPost }) => {
       ]}
     >
       <TouchableOpacity onPress={openPost}>
-        <ImageWithShimmer
+        <Image
           source={{
             uri: sizedPicsumUrl(
               post.image,
@@ -36,14 +37,18 @@ export const SuggestedPostCard = ({ post }: { post: SuggestedPost }) => {
               styles.image.height,
             ),
           }}
+          placeholder={{ blurhash: DEFAULT_BLURHASH }}
+          transition={200}
           style={styles.image}
           contentFit="cover"
         />
       </TouchableOpacity>
       <View style={styles.info}>
         <TouchableOpacity onPress={openProfile} style={styles.userRow}>
-          <ImageWithShimmer
+          <Image
             source={{ uri: sizedPravatarUrl(post.avatar, styles.avatar.width) }}
+            placeholder={{ blurhash: DEFAULT_BLURHASH }}
+            transition={200}
             style={styles.avatar}
           />
           <Text

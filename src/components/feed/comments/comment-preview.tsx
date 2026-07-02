@@ -1,10 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
+import { Image } from 'expo-image';
 
 import { ColorsContext } from '@/context/colors-context';
 import { HeartIcon } from '@/components/feed/icons/heart-icon';
-import { ImageWithShimmer } from '@/components/feed/shimmer/image-with-shimmer';
+import { DEFAULT_BLURHASH } from '@/constants/blurhash';
 import { FeedComment } from '@/data/mock-feed';
 import { formatRelativeTime } from '@/utils/feed-utils';
 
@@ -37,8 +38,10 @@ export const CommentPreview = ({
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={openProfile}>
-        <ImageWithShimmer
+        <Image
           source={{ uri: comment.avatar }}
+          placeholder={{ blurhash: DEFAULT_BLURHASH }}
+          transition={200}
           style={[styles.avatar, styles.avatarClip]}
         />
       </TouchableOpacity>
