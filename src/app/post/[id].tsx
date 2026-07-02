@@ -1,5 +1,11 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useState, useEffect, useCallback, useRef } from 'react';
+import {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  useTransition,
+} from 'react';
 import {
   View,
   Text,
@@ -37,9 +43,11 @@ const PostDetailScreen = () => {
   const inputRef = useRef<TextInput>(null);
   const prevCommentsLengthRef = useRef(0);
   const [post, setPost] = useState<FeedPost | null>(null);
+  const [footerPost, setFooterPost] = useState<FeedPost | null>(null);
   const [comments, setComments] = useState<FeedComment[]>([]);
   const [newComment, setNewComment] = useState('');
   const [replyInfo, setReplyInfo] = useState<ReplyInfo | null>(null);
+  const [, startTransition] = useTransition();
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
 
@@ -48,13 +56,14 @@ const PostDetailScreen = () => {
     if (foundPost) {
       setPost(foundPost);
       setComments(foundPost.comments);
+      startTransition(() => setFooterPost(foundPost));
     }
   }, [id]);
 
   const hasNewComments = comments.length > prevCommentsLengthRef.current;
   prevCommentsLengthRef.current = comments.length;
 
-  const relatedPosts = post ? findRelatedPosts(post) : [];
+  const relatedPosts = footerPost ? findRelatedPosts(footerPost) : [];
 
   const handleReply = useCallback((commentId: string, username: string) => {
     setReplyInfo({ commentId, username });
