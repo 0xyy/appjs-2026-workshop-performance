@@ -1,10 +1,6 @@
 import { useCallback } from 'react';
-import {
-  LayoutChangeEvent,
-  ListRenderItemInfo,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { LayoutChangeEvent, StyleSheet, View } from 'react-native';
+import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
 import Animated, {
   useAnimatedScrollHandler,
   useAnimatedStyle,
@@ -14,6 +10,8 @@ import Animated, {
 import { FeedItem } from '@/components/feed/feed-item';
 import { SuggestedPostsSection } from '@/components/feed/suggestions/suggested-posts-section';
 import { FeedListItem } from '@/data/mock-feed';
+
+const AnimatedFlashList = Animated.createAnimatedComponent(FlashList<FeedListItem>);
 
 export const FeedList = ({ data }: { data: FeedListItem[] }) => {
   const contentHeight = useSharedValue(0);
@@ -53,10 +51,11 @@ export const FeedList = ({ data }: { data: FeedListItem[] }) => {
       <View style={styles.progressTrack}>
         <Animated.View style={[styles.progressFill, progressStyle]} />
       </View>
-      <Animated.FlatList
+      <AnimatedFlashList
         data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
+        getItemType={(item) => item.type}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.content}
         onScroll={scrollHandler}
