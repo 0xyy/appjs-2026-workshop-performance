@@ -24,7 +24,9 @@ export const ImageCarousel = ({
   const [activeIndex, setActiveIndex] = useState(0);
   const colors = useContext(ColorsContext);
 
-  const handleScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+  const handleMomentumScrollEnd = (
+    e: NativeSyntheticEvent<NativeScrollEvent>,
+  ) => {
     const offset = e.nativeEvent.contentOffset.x;
     const index = Math.round(offset / IMAGE_WIDTH);
     if (index !== activeIndex) {
@@ -38,8 +40,7 @@ export const ImageCarousel = ({
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}
-        onScroll={handleScroll}
-        scrollEventThrottle={16}
+        onMomentumScrollEnd={handleMomentumScrollEnd}
       >
         {images.map((image, i) => (
           <Pressable key={`${image.uri}-${i}`} onPress={onImagePress}>

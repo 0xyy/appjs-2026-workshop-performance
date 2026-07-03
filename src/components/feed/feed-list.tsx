@@ -1,59 +1,65 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback } from 'react';
 import {
-  FlatList,
   LayoutChangeEvent,
   ListRenderItemInfo,
-  NativeScrollEvent,
-  NativeSyntheticEvent,
   StyleSheet,
   View,
 } from 'react-native';
+import Animated, {
+  useAnimatedScrollHandler,
+  useAnimatedStyle,
+  useSharedValue,
+} from 'react-native-reanimated';
 
 import { FeedItem } from '@/components/feed/feed-item';
 import { SuggestedPostsSection } from '@/components/feed/suggestions/suggested-posts-section';
 import { FeedListItem } from '@/data/mock-feed';
 
 export const FeedList = ({ data }: { data: FeedListItem[] }) => {
-  const contentHeight = useRef(0);
-  const layoutHeight = useRef(0);
-  const [progress, setProgress] = useState(0);
+  const contentHeight = useSharedValue(0);
+  const layoutHeight = useSharedValue(0);
+  const progress = useSharedValue(0);
 
-  const handleScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const offset = e.nativeEvent.contentOffset.y;
-    const max = Math.max(1, contentHeight.current - layoutHeight.current);
-    const p = Math.min(1, Math.max(0, offset / max));
-    setProgress(p);
-  };
+  const scrollHandler = useAnimatedScrollHandler((e) => {
+    const offset = e.contentOffset.y;
+    const max = Math.max(1, contentHeight.value - layoutHeight.value);
+    progress.value = Math.min(1, Math.max(0, offset / max));
+  });
 
   const handleContentSizeChange = (_w: number, h: number) => {
-    contentHeight.current = h;
+    contentHeight.value = h;
   };
 
   const handleLayout = (e: LayoutChangeEvent) => {
-    layoutHeight.current = e.nativeEvent.layout.height;
+    layoutHeight.value = e.nativeEvent.layout.height;
   };
 
-  const renderItem = useCallback(({ item }: ListRenderItemInfo<FeedListItem>) =>
-    item.type === 'suggestions' ? (
-      <SuggestedPostsSection posts={item.posts} />
-    ) : (
-      <FeedItem item={item} />
-    ),
-  []);
+  const progressStyle = useAnimatedStyle(() => ({
+    width: `${progress.value * 100}%`,
+  }));
+
+  const renderItem = useCallback(
+    ({ item }: ListRenderItemInfo<FeedListItem>) =>
+      item.type === 'suggestions' ? (
+        <SuggestedPostsSection posts={item.posts} />
+      ) : (
+        <FeedItem item={item} />
+      ),
+    [],
+  );
 
   return (
     <View style={styles.wrapper}>
       <View style={styles.progressTrack}>
-        <View style={[styles.progressFill, { width: `${progress * 100}%` }]} />
+        <Animated.View style={[styles.progressFill, progressStyle]} />
       </View>
-      <FlatList
+      <Animated.FlatList
         data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.content}
-        onScroll={handleScroll}
-        scrollEventThrottle={16}
+        onScroll={scrollHandler}
         onContentSizeChange={handleContentSizeChange}
         onLayout={handleLayout}
       />
