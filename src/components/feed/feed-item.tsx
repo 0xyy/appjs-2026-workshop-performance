@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { memo, useState, useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 
@@ -14,7 +14,11 @@ import { PostTimestamp } from './content/post-timestamp';
 import { TagList } from './content/tag-list';
 import { PostHeader } from './header/post-header';
 
-export const FeedItem = ({ item }: { item: FeedPostSlim }) => {
+export const FeedItem = memo(function FeedItem({
+  item,
+}: {
+  item: FeedPostSlim;
+}) {
   const colors = useContext(ColorsContext);
   const router = useRouter();
   const [isHidden, setIsHidden] = useState(false);
@@ -65,7 +69,7 @@ export const FeedItem = ({ item }: { item: FeedPostSlim }) => {
       <PostTimestamp timestamp={item.timestamp} />
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {

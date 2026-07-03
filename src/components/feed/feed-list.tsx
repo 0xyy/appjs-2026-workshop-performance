@@ -1,7 +1,8 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import {
   FlatList,
   LayoutChangeEvent,
+  ListRenderItemInfo,
   NativeScrollEvent,
   NativeSyntheticEvent,
   StyleSheet,
@@ -32,6 +33,14 @@ export const FeedList = ({ data }: { data: FeedListItem[] }) => {
     layoutHeight.current = e.nativeEvent.layout.height;
   };
 
+  const renderItem = useCallback(({ item }: ListRenderItemInfo<FeedListItem>) =>
+    item.type === 'suggestions' ? (
+      <SuggestedPostsSection posts={item.posts} />
+    ) : (
+      <FeedItem item={item} />
+    ),
+  []);
+
   return (
     <View style={styles.wrapper}>
       <View style={styles.progressTrack}>
@@ -39,13 +48,7 @@ export const FeedList = ({ data }: { data: FeedListItem[] }) => {
       </View>
       <FlatList
         data={data}
-        renderItem={({ item }) =>
-          item.type === 'suggestions' ? (
-            <SuggestedPostsSection posts={item.posts} />
-          ) : (
-            <FeedItem item={item} />
-          )
-        }
+        renderItem={renderItem}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.content}
