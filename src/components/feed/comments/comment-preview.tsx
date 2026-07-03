@@ -4,7 +4,7 @@ import { useRouter } from 'expo-router';
 import { Image } from 'expo-image';
 
 import { ColorsContext } from '@/context/colors-context';
-import { HeartIcon } from '@/components/feed/icons/heart-icon';
+import { IconSymbol } from '@/components/ui/icon-symbol';
 import { DEFAULT_BLURHASH } from '@/constants/blurhash';
 import { FeedComment } from '@/data/mock-feed';
 import { formatRelativeTime } from '@/utils/feed-utils';
@@ -75,10 +75,10 @@ export const CommentPreview = ({
         }}
         style={styles.heartButton}
       >
-        <HeartIcon
+        <IconSymbol
+          name={isLiked ? 'heart.fill' : 'heart'}
           size={12}
           color={isLiked ? '#FF6B6B' : colors.icon}
-          filled={isLiked}
         />
       </TouchableOpacity>
     </View>

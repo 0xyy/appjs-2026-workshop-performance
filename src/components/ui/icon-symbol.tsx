@@ -29,6 +29,13 @@ const MAPPING = {
   paperplane: 'send',
   bookmark: 'bookmark-border',
   'bookmark.fill': 'bookmark',
+  'checkmark.seal.fill': 'verified',
+  bell: 'notifications-none',
+  link: 'link',
+  'square.and.arrow.up': 'ios-share',
+  person: 'person',
+  'eye.slash': 'visibility-off',
+  flag: 'flag',
 } as IconMapping;
 
 /**
