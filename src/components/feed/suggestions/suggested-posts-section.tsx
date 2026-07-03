@@ -1,12 +1,7 @@
-import { useContext } from 'react';
-import {
-  ScrollView,
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
+import { useCallback, useContext } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
+import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
 
 import { ColorsContext } from '@/context/colors-context';
 import { SuggestedPost } from '@/data/mock-feed';
@@ -25,6 +20,13 @@ export const SuggestedPostsSection = ({
     router.push('/suggestions');
   };
 
+  const renderItem = useCallback(
+    ({ item }: ListRenderItemInfo<SuggestedPost>) => (
+      <SuggestedPostCard post={item} />
+    ),
+    [],
+  );
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -35,15 +37,14 @@ export const SuggestedPostsSection = ({
           <Text style={[styles.seeAll, { color: colors.tint }]}>See All</Text>
         </TouchableOpacity>
       </View>
-      <ScrollView
+      <FlashList
+        data={posts}
         horizontal
+        renderItem={renderItem}
+        keyExtractor={(post) => post.id}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
-      >
-        {posts.map((post) => (
-          <SuggestedPostCard key={post.id} post={post} />
-        ))}
-      </ScrollView>
+      />
     </View>
   );
 };
