@@ -52,10 +52,6 @@ export const FeedList = ({ data }: { data: FeedListItem[] }) => {
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.content}
-        windowSize={21}
-        maxToRenderPerBatch={10}
-        initialNumToRender={5}
-        removeClippedSubviews={false}
         onScroll={handleScroll}
         scrollEventThrottle={16}
         onContentSizeChange={handleContentSizeChange}
