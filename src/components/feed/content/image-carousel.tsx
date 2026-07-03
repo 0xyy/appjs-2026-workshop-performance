@@ -8,6 +8,8 @@ import {
   StyleSheet,
 } from 'react-native';
 
+import { useMappingHelper } from '@shopify/flash-list';
+
 import { ColorsContext } from '@/context/colors-context';
 import { FeedImage } from '@/data/mock-feed';
 import { CarouselImage } from './carousel-image';
@@ -23,6 +25,7 @@ export const ImageCarousel = ({
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const colors = useContext(ColorsContext);
+  const { getMappingKey } = useMappingHelper();
 
   const handleMomentumScrollEnd = (
     e: NativeSyntheticEvent<NativeScrollEvent>,
@@ -43,7 +46,7 @@ export const ImageCarousel = ({
         onMomentumScrollEnd={handleMomentumScrollEnd}
       >
         {images.map((image, i) => (
-          <Pressable key={`${image.uri}-${i}`} onPress={onImagePress}>
+          <Pressable key={getMappingKey(image.uri, i)} onPress={onImagePress}>
             <CarouselImage image={image} />
           </Pressable>
         ))}
@@ -51,9 +54,9 @@ export const ImageCarousel = ({
 
       {images.length > 1 && (
         <View style={styles.dotsContainer}>
-          {images.map((_, i) => (
+          {images.map((image, i) => (
             <View
-              key={`dot-${i}`}
+              key={getMappingKey(image.uri, i)}
               style={[
                 styles.dot,
                 i === activeIndex
