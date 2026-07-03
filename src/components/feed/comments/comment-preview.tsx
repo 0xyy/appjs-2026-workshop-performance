@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Image } from 'expo-image';
@@ -20,10 +20,6 @@ export const CommentPreview = ({
   const router = useRouter();
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(comment.likes);
-
-  useEffect(() => {
-    setLikeCount(comment.likes);
-  }, [comment.likes]);
 
   const formattedTime = formatRelativeTime(comment.timestamp);
 
